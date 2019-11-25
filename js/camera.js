@@ -16,13 +16,15 @@ function startCam() {
 	}
 }
 
+// Try this shit later ->
+
 // // window.addEventListener("load", startCam);
 
 // $.ajax("urlthaticameupwith.com", {info: thoy}).then((res) => {
 
 // }).catch ((err) => {
 
-// }) USEFUL STUFF FOR LATER
+// })
 
 // var req = new XMLHttpRequest();
 // req.addEventListener("load", () => {
