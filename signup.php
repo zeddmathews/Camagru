@@ -130,7 +130,7 @@ if ($pass1 == $pass2) {
 		mail($mail, 'Confirmation', $msg);
 		echo "<br> An email with a verification link has been sent to you.";
 		$stmt->execute();
-		header("Location: ../user/php/verify.php");
+		header("Location: verify.php");
 	}
 	catch (PDOException $e){
 		echo $sql ."<br>". $e->getMessage();
