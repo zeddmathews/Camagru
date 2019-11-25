@@ -10,6 +10,7 @@ body{
 
 #footer{
 	padding: 20px;
+	text-align: right;
 }
 
 .header a{
@@ -29,16 +30,16 @@ body{
 #right {
 	text-align: right;
 	color: #EDF5E1;
-	text-decoration: none
+	text-decoration: none;
 	;
 }
 
 .h {
 	border: 0.1vw solid#05386B;
-	width: 80vw;
+	width: 100vw;
 }
 
 .f {
 	border: 0.1vw solid#05386B;
-	width: 80vw;
+	width: 100vw;
 }
