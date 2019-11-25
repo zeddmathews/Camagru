@@ -1,34 +1,44 @@
 body{
 	margin: 0;
 	padding: 0;
-	background: rgb(37, 223, 146);
+	background: #5CDB95;
 }
 
-.header{
-	margin: 0;
-	top: 0;
+#header{
 	padding: 20px;
-	background: rgb(6, 58, 111);
 }
 
 #footer{
-	background: rgb(6, 58, 111);
 	padding: 20px;
 }
 
 .header a{
 	border: solid rgb(0, 0, 0);
 	border-radius: 10px;
-	padding: 5px;
+	padding: 10px;
 	text-decoration: none;
 	color: black;
-	background-color: aqua;
 }
 
 #left {
 	text-align: left;
+	color: #05386B;
+	text-decoration: none;
 }
 
 #right {
 	text-align: right;
+	color: #EDF5E1;
+	text-decoration: none
+	;
+}
+
+.h {
+	border: 0.1vw solid#05386B;
+	width: 80vw;
+}
+
+.f {
+	border: 0.1vw solid#05386B;
+	width: 80vw;
 }

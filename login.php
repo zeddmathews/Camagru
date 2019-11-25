@@ -10,7 +10,7 @@
 	<title>Login</title>
 </head>
 <body>
-	<form class="login-form" action="../../dev/login.php">
+	<form class="login-form" action="">
 
 		<label>E-mail</label>
 		<br>
@@ -41,7 +41,7 @@
 		$stmt->bindParam(':encrypt', $pass);
 		$stmt->execute();
 		$_SESSION['logged_in'] = $mail;
-		header("Location: ../user/php/feed.php");
+		header("Location: feed.php");
 	}
 	catch (PDOException $e) {
 		echo 'Nice'. $e->getMessage();

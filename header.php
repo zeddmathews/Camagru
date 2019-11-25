@@ -8,9 +8,11 @@
 	<link rel="stylesheet" href="css/camagru.css">
 </head>
 <body>
-<div class = "header">
+<div id="header">
 	<a href="index.php" id="left">Camagru</a>
-	
+
 	<a href="login.php" id="right">Login</a>
 	<a href="signup.php" id="right">Sign Up</a>
+
 </div>
+<hr class="h">
