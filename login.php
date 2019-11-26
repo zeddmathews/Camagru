@@ -32,13 +32,13 @@
 <?php include('footer.php')?>
 
 <?php
-	require('../config/pdo_connection.php');
+	require('config/pdo_connection.php');
 	$mail = trim(htmlspecialchars($_POST['email']));
 	$pass = trim(htmlspecialchars($_POST['password']));
 	try {
-		$stmt = $conn->prepare("SELECT username FROM users WHERE email = :mail AND encrypt = :pass");
+		$stmt = $conn->prepare("SELECT * FROM users WHERE email = :mail AND encrypt = :pass");
 		$stmt->bindParam(':mail', $mail);
-		$stmt->bindParam(':encrypt', $pass);
+		$stmt->bindParam(':pass', $pass);
 		$stmt->execute();
 		$_SESSION['logged_in'] = $mail;
 		header("Location: feed.php");

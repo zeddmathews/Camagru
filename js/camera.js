@@ -54,7 +54,10 @@ function takeSnap() {
 function saveSnap() {
 	let data = 'data='+document.getElementById("img_up").value;
 	let xhr = new XMLHttpRequest();
-	xhr.open('POST', '../upload_image.php',true);
+	xhr.open('POST', 'upload_image.php',true);
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send(data);
+	xhr.onload = () =>{
+		console.log(xhr.responseText);
+	} 
 }
