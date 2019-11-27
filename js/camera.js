@@ -36,7 +36,7 @@ function startCam() {
 // req.send("{info: stuff}");
 
 function stopCam() {
-	navigator.mediaDevices.getUserMedia ({video: false})
+	// navigator.mediaDevices.getUserMedia ({video: false})
 	video.srcObject = null;
 }
 
@@ -55,10 +55,12 @@ function takeSnap() {
 function saveSnap() {
 	var data = document.getElementById("myCanvas");
 	document.getElementById("image").src = document.getElementById("myCanvas").toDataURL('image/png');
-	console.log(document.getElementById("image"));
 	let xhr = new XMLHttpRequest();
-	xhr.open('POST', 'upload_image.php',true);
+	xhr.addEventListener("load", () => {
+		console.log(xhr.responseText);
+	});
+	xhr.open('POST', 'upload_image.php');
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.send(data);
+	xhr.send("gobble=" + encodeURIComponent(data.toDataURL().replace("data:image/png;base64,", "")));
 	console.log(data);
 }
