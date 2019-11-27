@@ -10,9 +10,18 @@
 <body>
 <div id="header">
 	<a href="index.php" id="left">Camagru</a>
-
-	<a href="login.php" id="right">Login</a>
-	<a href="signup.php" id="right">Sign Up</a>
-
+	<a href="feed.php" id="right">Feed</a>
+<?php
+	session_start();
+	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
+		?>	<a href="login.php" id="right">Login</a>
+			<a href="signup.php" id="right">Sign Up</a>
+	<?php
+	} else {
+		?>	<a href="profile.php" id="right">Profile</a>
+			<a href="logout.php" id ="right">Logout</a>
+	<?php
+	}
+	?>
 </div>
 <hr class="h">

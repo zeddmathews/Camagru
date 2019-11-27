@@ -36,6 +36,7 @@ function startCam() {
 // req.send("{info: stuff}");
 
 function stopCam() {
+	navigator.mediaDevices.getUserMedia ({video: false})
 	video.srcObject = null;
 }
 
@@ -52,12 +53,12 @@ function takeSnap() {
 }
 
 function saveSnap() {
-	let data = 'data='+document.getElementById("img_up").value;
+	var data = document.getElementById("myCanvas");
+	document.getElementById("image").src = document.getElementById("myCanvas").toDataURL('image/png');
+	console.log(document.getElementById("image"));
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'upload_image.php',true);
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send(data);
-	xhr.onload = () =>{
-		console.log(xhr.responseText);
-	} 
+	console.log(data);
 }

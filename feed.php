@@ -1,3 +1,4 @@
+<?php include('header.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +25,14 @@
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
 	</form>
-	<?php
+	<!-- <?php
 		require('config/pdo_connection.php');
+		var_dump($_SESSION['uid']);
+		if (isset($_POST['submit'])) {
+			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
+				echo '<label>You are not logged in</label><br>';
+			}
+		}
 		$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
 		$stmt->execute();
 		while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC))
@@ -34,13 +41,15 @@
 			<div class = "img" style = "background: url(../../dev/saved/<?php echo $imgs['imagename'] ?>);"></div>
 		<?php
 		}
-	?>
+	?> -->
 	<button onclick="startCam();">Camera</button>
 	<button onclick="stopCam();">Off</button>
 	<button onclick="takeSnap();">Capture</button>
 	<button onclick="saveSnap();">Save</button>
 	<video autoplay = true id="video"></video>
 	<canvas id="myCanvas" width="300" height="300"></canvas>
+	<img src="" id="image"/>
 
 </body>
 </html>
+<?php include('footer.php');?>

@@ -10,7 +10,7 @@
 	<title>Login</title>
 </head>
 <body>
-	<form class="login-form" action="">
+	<form class="login-form" action="" method="post">
 
 		<label>E-mail</label>
 		<br>
@@ -32,18 +32,24 @@
 <?php include('footer.php')?>
 
 <?php
+	session_start();
 	require('config/pdo_connection.php');
 	$mail = trim(htmlspecialchars($_POST['email']));
 	$pass = trim(htmlspecialchars($_POST['password']));
-	try {
-		$stmt = $conn->prepare("SELECT * FROM users WHERE email = :mail AND encrypt = :pass");
-		$stmt->bindParam(':mail', $mail);
-		$stmt->bindParam(':pass', $pass);
-		$stmt->execute();
-		$_SESSION['logged_in'] = $mail;
-		header("Location: feed.php");
-	}
-	catch (PDOException $e) {
-		echo 'Nice'. $e->getMessage();
+	if ($_POST) {	
+		try {
+			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			// $stmt->bindParam(':mail', $mail);
+			// $stmt->bindParam(':pass', $pass);
+			$stmt->execute(array($mail));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (password_verify($pass, $result['encrypt'])) {
+			$_SESSION['logged_in'] = $mail;
+			header("Location: feed.php");
+			}
+		}
+		catch (PDOException $e) {
+			echo 'Nice'. $e->getMessage();
+		}
 	}
 ?>
