@@ -39,13 +39,11 @@
 	if ($_POST) {	
 		try {
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-			// $stmt->bindParam(':mail', $mail);
-			// $stmt->bindParam(':pass', $pass);
 			$stmt->execute(array($mail));
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
 			if (password_verify($pass, $result['encrypt'])) {
-			$_SESSION['logged_in'] = $mail;
-			header("Location: feed.php");
+				$_SESSION['logged_in'] = $mail;
+				header("Location: feed.php");
 			}
 		}
 		catch (PDOException $e) {
