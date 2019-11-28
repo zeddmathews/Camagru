@@ -18,12 +18,7 @@
 	<title>Profile</title>
 </head>
 <body>
-	<form class="profile-form" action="" method="post">
-	<button type="submit" name="mail-notif"></button>
-	</form>
-	<?php
-		if (isset($_POST))
-	?>
+	<button onclick=""></button>
 </body>
 </html>
 

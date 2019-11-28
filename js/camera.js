@@ -61,6 +61,6 @@ function saveSnap() {
 	});
 	xhr.open('POST', 'upload_image.php');
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.send("gobble=" + encodeURIComponent(data.toDataURL().replace("data:image/png;base64,", "")));
+	xhr.send("make_img=" + encodeURIComponent(data.toDataURL().replace("data:image/png;base64,", "")));
 	console.log(data);
 }

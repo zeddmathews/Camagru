@@ -46,8 +46,8 @@
 		<br>
 
 		<label>Already have an account?</label>
-		<button type="button"><a href="../../index.php">Login</a></button>
-		<button type="button"><a href="./reset_account.php">Forgotten password?</a></button>
+		<button type="button"><a href="login.php">Login</a></button>
+		<button type="button"><a href="change_password.php">Forgotten password?</a></button>
 	</form>
 </body>
 </html>

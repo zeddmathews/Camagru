@@ -4,7 +4,7 @@
 		die ('You are not logged in');
 	}
 	try {
-		$img = $_POST['gobble'];
+		var_dump($img = $_POST['make_img']);
 		$img = base64_decode($img);
 		$img = imagecreatefromstring($img);
 		$file_name = rand(1000000, 9999999);

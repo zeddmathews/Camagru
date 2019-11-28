@@ -12,15 +12,11 @@
 <body>
 	<form class="login-form" action="" method="post">
 
-		<label>E-mail</label>
-		<br>
-		<input type="email" name="email" required>
+		<input type="email" name="email" placeholder="E-mail" required>
 
 		<br>
 
-		<label>Password</label>
-		<br>
-		<input type="password" name="password" required>
+		<input type="password" name="password" placeholder="Password" required>
 
 		<br>
 
@@ -41,6 +37,9 @@
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 			$stmt->execute(array($mail));
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($result['email'] != $mail) {
+				echo 'This account does not exist';
+			}
 			if (password_verify($pass, $result['encrypt'])) {
 				$_SESSION['logged_in'] = $mail;
 				header("Location: feed.php");
