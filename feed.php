@@ -27,7 +27,6 @@
 	</form>
 	<?php
 		require('config/pdo_connection.php');
-		var_dump($_SESSION['uid']);
 		if (isset($_POST['submit'])) {
 			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 				echo '<label>You are not logged in</label><br>';
@@ -38,7 +37,7 @@
 		while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
 		?>
-			<div class = "img" style = "background: url(../../dev/saved/<?php echo $imgs['imagename'] ?>);"></div>
+			<div class = "img" style = "background: url(image/<?php echo $imgs['imagename'] ?>);"></div>
 		<?php
 		}
 	?>

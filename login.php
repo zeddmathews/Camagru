@@ -29,23 +29,25 @@
 
 <?php
 	require('config/pdo_connection.php');
-	$mail = trim(htmlspecialchars($_POST['email']));
-	$pass = trim(htmlspecialchars($_POST['password']));
-	if ($_POST) {	
-		try {
-			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-			$stmt->execute(array($mail));
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			if ($result['email'] != $mail) {
-				echo 'This account does not exist';
+	if (filter_has_var(INPUT_POST, 'Login')) {
+		$mail = trim(htmlspecialchars($_POST['email']));
+		$pass = trim(htmlspecialchars($_POST['password']));
+		if (!empty($mail) && !empty($pass)) {
+			try {
+				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+				$stmt->execute(array($mail));
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($result['email'] != $mail) {
+					echo 'This account does not exist';
+				}
+				if (password_verify($pass, $result['encrypt'])) {
+					$_SESSION['logged_in'] = $mail;
+					header("Location: feed.php");
+				}
 			}
-			if (password_verify($pass, $result['encrypt'])) {
-				$_SESSION['logged_in'] = $mail;
-				header("Location: feed.php");
+			catch (PDOException $e) {
+				echo 'Nice'. $e->getMessage();
 			}
-		}
-		catch (PDOException $e) {
-			echo 'Nice'. $e->getMessage();
 		}
 	}
 ?>
