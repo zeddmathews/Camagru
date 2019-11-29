@@ -8,16 +8,6 @@
 	<link rel ="stylesheet" href="css/camagru.css">
 	<script src="js/camera.js"></script>
 	<title>Feed</title>
-	<style>
-		.img
-		{
-			/* border: 10px solid red; */
-			/* background: no-repeat; */
-			/* background-size: cover; */
-			height: 50vh;
-			width: 25vw;
-		}
-	</style>
 </head>
 <body onload="init();">
 	<h3>Display (preferably) pretty shit</h3>
@@ -25,26 +15,6 @@
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
 	</form>
-	<?php
-		require('config/pdo_connection.php');
-		if (isset($_POST['submit'])) {
-			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
-				echo '<label>You are not logged in</label><br>';
-			}
-		}
-		try {
-			$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
-			$stmt->execute();
-			while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			?>
-				<div class = "img" src = "saved/<?php echo $imgs['imagename'] ?>;"></div>
-			<?php
-			}
-		}
-	catch(PDOException $e) {
-		echo $e->getMessage();
-	}
-	?>
 	<button onclick="startCam();">Camera</button>
 	<button onclick="stopCam();">Off</button>
 	<button onclick="takeSnap();">Capture</button>

@@ -10,7 +10,7 @@
 <body>
 <div id="header">
 	<a href="index.php" id="left">Camagru</a>
-	<a href="feed.php" id="right">Feed</a>
+	<a href="feed.php" id="right">Images</a>
 <?php
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
