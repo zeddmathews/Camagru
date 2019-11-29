@@ -25,8 +25,11 @@
 		// $type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 		// move_uploaded_file($_FILES["img_up"]["tmp_name"], $file);
 
-		$stmt = $conn->prepare("INSERT INTO images(`imagename`, `created`) VALUES(?, ?)");
-		$stmt->execute(array($file_name, 1));
+		$fetch = $conn->prepare("SELECT * FROM users WHERE email = ?");
+		$fetch->execute(array($_SESSION['logged_in']));
+		$print = $fetch->fetch(PDO::FETCH_ASSOC);
+		$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+		$stmt->execute(array($file_name, $print['username'],  1));
 	}
 	catch (PDOException $e) {
 		echo 'No you'."<br>".$e->getMessage();

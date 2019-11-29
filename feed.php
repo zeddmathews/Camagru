@@ -32,14 +32,18 @@
 				echo '<label>You are not logged in</label><br>';
 			}
 		}
-		$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
-		$stmt->execute();
-		while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC))
-		{
-		?>
-			<div class = "img" style = "background: url(image/<?php echo $imgs['imagename'] ?>);"></div>
-		<?php
+		try {
+			$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
+			$stmt->execute();
+			while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			?>
+				<div class = "img" src = "saved/<?php echo $imgs['imagename'] ?>;"></div>
+			<?php
+			}
 		}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
 	?>
 	<button onclick="startCam();">Camera</button>
 	<button onclick="stopCam();">Off</button>

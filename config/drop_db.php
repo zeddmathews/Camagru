@@ -1,6 +1,8 @@
 <?php
 	require('database.php');
 	require('pdo_connection.php');
+	session_unset();
+	session_destroy();
 
 	$ditch = "DROP DATABASE IF EXISTS $DB_NAME";
 	$conn->exec($ditch);
