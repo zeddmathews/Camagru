@@ -28,7 +28,6 @@
 <?php include('footer.php')?>
 
 <?php
-	session_start();
 	require('config/pdo_connection.php');
 	$mail = trim(htmlspecialchars($_POST['email']));
 	$pass = trim(htmlspecialchars($_POST['password']));
