@@ -12,7 +12,9 @@
 	<a href="index.php" id="left">Camagru</a>
 	<a href="feed.php" id="right">Feed</a>
 <?php
-	session_start();
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
 	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 		?>	<a href="login.php" id="right">Login</a>
 			<a href="signup.php" id="right">Sign Up</a>

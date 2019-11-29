@@ -43,3 +43,7 @@ body{
 	border: 0.1vw solid#05386B;
 	width: 100vw;
 }
+#video {
+	width: 20vw;
+	height: 20vw;
+}
