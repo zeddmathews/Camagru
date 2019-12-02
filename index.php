@@ -40,17 +40,12 @@
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
 	</form> -->
-	<button onclick="startCam();">Camera</button>
-	<button onclick="stopCam();">Off</button>
-	<button onclick="takeSnap();">Capture</button>
-	<button onclick="saveSnap();">Save</button>
-	<video autoplay = true id="video"></video>
-	<canvas id="myCanvas" width="300" height="300"></canvas>
 	<img src="" id="image"/>
 	<br>
 	<?php
 			while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
 				<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
+				<br>
 			<?php
 			}
 	?>

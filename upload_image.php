@@ -1,5 +1,6 @@
 <?php
 	require('config/pdo_connection.php');
+	session_start();
 	if(!(isset($_SESSION['logged_in']))) {
 		die ('You are not logged in');
 	}

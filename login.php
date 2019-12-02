@@ -42,7 +42,7 @@
 				}
 				if (password_verify($pass, $result['encrypt'])) {
 					$_SESSION['logged_in'] = $mail;
-					header("Location: feed.php");
+					header("Location: index.php");
 				}
 			}
 			catch (PDOException $e) {

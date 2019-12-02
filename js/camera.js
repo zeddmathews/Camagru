@@ -36,8 +36,8 @@ function startCam() {
 // req.send("{info: stuff}");
 
 function stopCam() {
-	// navigator.mediaDevices.getUserMedia ({video: false})
-	video.srcObject = null;
+	navigator.mediaDevices.getUserMedia ({video: false})
+	// video.srcObject = null;
 }
 
 var canvas;

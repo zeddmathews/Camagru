@@ -6,11 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Camagru</title>
 	<link rel="stylesheet" href="css/camagru.css">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div id="header">
 	<a href="index.php" id="left">Camagru</a>
-	<a href="feed.php" id="right">Images</a>
 <?php
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
@@ -21,6 +22,7 @@
 	<?php
 	} else {
 		?>	<a href="profile.php" id="right">Profile</a>
+			<a href="camera.php" id="right">Images</a>
 			<a href="logout.php" id ="right">Logout</a>
 	<?php
 	}
