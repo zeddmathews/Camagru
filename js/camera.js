@@ -62,5 +62,18 @@ function saveSnap() {
 	xhr.open('POST', 'upload_image.php');
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send("make_img=" + encodeURIComponent(data.toDataURL().replace("data:image/png;base64,", "")));
+	
 	console.log(data);
+}
+likes = (id) => {
+	var request = new XMLHttpRequest();
+
+	if (request.status === 200)
+	{
+		
+	}
+
+	request.open('POST', 'likes.php');
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.send("id=" + id);
 }

@@ -51,6 +51,8 @@
 				<h4>Posted by <?php echo $imgs['username']?></h4>
 				<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
 				<br>
+				<button onclick="likes(<?php echo $imgs['id']?>);">Like</button>
+				<p> 1 </p>
 			<?php
 			}
 	?>
