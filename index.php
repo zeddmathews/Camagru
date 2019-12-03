@@ -13,6 +13,14 @@
 		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
+		try {
+			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			$stmt->execute(array($_SESSION['logged_in']));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e) {
+			echo $e->getMessage();
+		}
 		?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +43,7 @@
 	</style>
 </head>
 <body onload="init();">
-	<h3>Display (preferably) pretty shit</h3>
+	<h3>Welcome <?php echo $result['username'];?></h3>
 	<!-- <form action="" method="post" enctype="multipart/form-data">
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
@@ -44,6 +52,7 @@
 	<br>
 	<?php
 			while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
+				<h4>Posted by <?php echo $imgs['username']?></h4>
 				<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
 				<br>
 			<?php
