@@ -37,44 +37,71 @@
 		echo $sql ."<br>". $e->getMessage();
 	}
 
-	// // Create default user
-	// try {
-	// 	$password = 'ftg150Fu#';
-	// 	$lemail = 'mathewszain@gmail.com';
-	// 	$firsty = 'Zain';
-	// 	$lasty = 'Mathews';
-	// 	$usery = 'Gandaft';
-	// 	$token = md5($usery);
-	// 	$encrypt = password_hash($password, PASSWORD_BCRYPT);
-	// 	$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
-	// 	VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
-	// 	$stmt = $conn->prepare($sql);
-	// 	$stmt->bindParam(':firsty', $firsty);
-	// 	$stmt->bindParam(':lasty', $lasty);
-	// 	$stmt->bindParam(':usery', $usery);
-	// 	$stmt->bindParam(':lemail', $lemail);
-	// 	$stmt->bindParam(':encrypt', $encrypt);
-	// 	$stmt->bindParam(':token', $token);
-	// 	$stmt->execute();
-	// }
-	// catch (PDOException $e){
-	// 	echo $sql ."<br>". $e->getMessage();
-	// }
+	// Create default user
+	try {
+		$password = 'ftg150Fu#';
+		$lemail = 'iam@groot.com';
+		$firsty = 'I';
+		$lasty = 'Am';
+		$usery = 'Groot';
+		$token = md5($usery);
+		$encrypt = password_hash($password, PASSWORD_BCRYPT);
+		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':firsty', $firsty);
+		$stmt->bindParam(':lasty', $lasty);
+		$stmt->bindParam(':usery', $usery);
+		$stmt->bindParam(':lemail', $lemail);
+		$stmt->bindParam(':encrypt', $encrypt);
+		$stmt->bindParam(':token', $token);
+		$stmt->execute();
+	}
+	catch (PDOException $e){
+		echo $sql ."<br>". $e->getMessage();
+	}
 
 	// Build table 'Images'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS images (
-			id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			imagename VARCHAR(200) NOT NULL,
 			username VARCHAR (100) NOT NULL,
 			created VARCHAR(200) NOT NULL
 		)";
 		$conn->exec($sql);
-		echo "Extremely functional shit";
+		echo "Extremely functional shit<br>";
 	}
 	catch (PDOException $e){
 		echo $sql ."<br>". $e->getMessage();
 	}
-	header("Location: ../index.php");
+
+	// Build table 'Comments'
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS comments (
+			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			postedby VARCHAR(200),
+			commentedby VARCHAR(200)
+		)";
+		$conn->exec($sql);
+		echo "Amazingly functional shit<br>";
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS likes (
+			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			postedby VARCHAR(200),
+			likedby VARCHAR(200),
+			totallikes INT(250)
+		)";
+		$conn->exec($sql);
+		echo "Phenomenally functional shit<br>";
+		header("Location: ../index.php");
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
 	$conn = null;
 ?>
