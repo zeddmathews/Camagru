@@ -2,6 +2,9 @@
 
 <?php
 	require('config/pdo_connection.php');
+	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
+		header("Location: login.php");
+	}
 	$mail = $_SESSION['logged_in'];
 	$stmt = $conn->prepare("SELECT username FROM users WHERE email = ?");
 	$stmt->execute(array($mail));
@@ -19,7 +22,7 @@
 </head>
 <body>
 	<form>
-		<>fhhjkuk</>
+		
 	</form>
 </body>
 </html>
