@@ -89,6 +89,8 @@
 	catch(PDOException $e) {
 		echo $e->getMessage();
 	}
+
+	// Build table 'Likes'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS likes (
 			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -103,5 +105,22 @@
 	catch(PDOException $e) {
 		echo $e->getMessage();
 	}
+
+	// Insert default images
+	// try {
+	// 	$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+	// 	$stmt->execute(array("feather.jpeg", Groot, 1));
+	// 	$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+	// 	$stmt->execute(array("flowers.jpeg", Groot, 1));
+	// 	$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+	// 	$stmt->execute(array("glow.jpeg", Groot, 1));
+	// 	$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+	// 	$stmt->execute(array("rose.jpeg", Groot, 1));
+	// 	$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `created`) VALUES(?, ?, ?)");
+	// 	$stmt->execute(array("water.jpeg", Groot, 1));
+	// }
+	// catch(PDOException $e) {
+	// 	echo $e->getMessage();
+	// }
 	$conn = null;
 ?>

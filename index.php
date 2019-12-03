@@ -14,9 +14,9 @@
 			echo $e->getMessage();
 		}
 		try {
-			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-			$stmt->execute(array($_SESSION['logged_in']));
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			$query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			$query->execute(array($_SESSION['logged_in']));
+			$result = $query->fetch(PDO::FETCH_ASSOC);
 		}
 		catch(PDOException $e) {
 			echo $e->getMessage();
@@ -43,11 +43,7 @@
 	</style>
 </head>
 <body onload="init();">
-	<h3>Welcome <?php echo $result['username'];?></h3>
-	<!-- <form action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="img_up" id="img_up">
-		<input type="submit" name="submit" value="Upload Image">
-	</form> -->
+	<h3>Welcome <?php echo $result['username']?></h3>
 	<img src="" id="image"/>
 	<br>
 	<?php
