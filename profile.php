@@ -54,13 +54,13 @@
 				else {
 					try {
 						$encrypt = password_hash($new_pass, PASSWORD_BCRYPT);
-						$update_info = $conn->prepare("UPDATE users SET username = ? AND email = ? AND encrypt = ? AND verified = ?");
-						$update_info->execute(array($new_user, $new_email, $new_pass, 0));
+						$update_info = $conn->prepare("UPDATE users SET username = ?, email = ?, encrypt = ?, verified = 0 WHERE username = ?");
+						$update_info->execute(array($new_user, $new_email, $new_pass, $cur_user));
 						$test = $conn->prepare("SELECT username FROM users WHERE username = ?");
 						$test->execute(array($new_user));
 						$print = $test->fetch(PDO::FETCH_ASSOC);
 						if ($print['username'] == $new_user) {
-							echo 'Details successfully updated. Please verify your new email address';
+							echo 'Details successfully updated. Please verify your new email address.';
 						}
 					}
 					catch(PDOException $e) {
