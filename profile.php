@@ -6,10 +6,12 @@
 		header("Location: login.php");
 	}
 	$mail = $_SESSION['logged_in'];
-	$stmt = $conn->prepare("SELECT username FROM users WHERE email = ?");
+	$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 	$stmt->execute(array($mail));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo $row['username'];
+	echo $row['username']."<br>";
+	// var_dump($row['email']);
+	// var_dump($row['username']);
 
 	if (filter_has_var(INPUT_POST, 'Update')) {
 		$cur_user = trim(htmlspecialchars($_POST['current_user']));
@@ -18,6 +20,7 @@
 		$new_user = trim(htmlspecialchars($_POST['new_user']));
 		$new_email = trim(htmlspecialchars($_POST['new_email']));
 		$new_pass = trim(htmlspecialchars($_POST['new_password']));
+		$new_pass2 = trim(htmlspecialchars($_POST['new_password2']));
 
 		if ($cur_user != $row['username']) {
 			echo 'Incorrect username';
@@ -30,9 +33,40 @@
 		}
 		else {
 			try {
-				$scan_all = $conn->prepare("SELECT * FROM users WHERE (username = ?, email = ?)");
+				$scan_all = $conn->prepare("SELECT * FROM users WHERE username = ? AND email = ?");
 				$scan_all->execute(array($row['username'], $row['email']));
 				$compare = $scan_all->fetch(PDO::FETCH_ASSOC);
+				if ($new_user == $row['username']) {
+					echo 'Pick a new username';
+				}
+				else if ($new_user == $compare['username']) {
+					echo 'Username already taken';
+				}
+				else if ($new_email == $row['email']) {
+					echo 'Pick a new email';
+				}
+				else if ($new_email == $compare['email']) {
+					echo 'Email already taken';
+				}
+				else if ($new_pass != $new_pass2) {
+					echo 'Please enter matching passwords';
+				}
+				else {
+					try {
+						$encrypt = password_hash($new_pass, PASSWORD_BCRYPT);
+						$update_info = $conn->prepare("UPDATE users SET username = ? AND email = ? AND encrypt = ? AND verified = ?");
+						$update_info->execute(array($new_user, $new_email, $new_pass, 0));
+						$test = $conn->prepare("SELECT username FROM users WHERE username = ?");
+						$test->execute(array($new_user));
+						$print = $test->fetch(PDO::FETCH_ASSOC);
+						if ($print['username'] == $new_user) {
+							echo 'Details successfully updated. Please verify your new email address';
+						}
+					}
+					catch(PDOException $e) {
+						echo $e->getMessage();
+					}
+				}
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();
@@ -64,6 +98,8 @@
 		<input type="email" name="new_email" placeholder="New Email" required>
 		<br>
 		<input type="password" name="new_password" placeholder="New Password" required>
+		<br>
+		<input type="password" name="new_password2" placeholder="Comfirm New Password" required>
 		<br>
 		<button type="submit" name="Update">Update</button>
 	</form>
