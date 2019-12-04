@@ -22,7 +22,7 @@
 	<?php
 	} else {
 		?>	<a href="profile.php" id="right">Profile</a>
-			<a href="camera.php" id="right">Images</a>
+			<a href="camera.php" id="right">Camera</a>
 			<a href="logout.php" id ="right">Logout</a>
 	<?php
 	}

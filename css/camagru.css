@@ -47,3 +47,11 @@ body{
 	width: 20vw;
 	height: 20vw;
 }
+.img {
+	border: 0.5vmax solid #05386B;
+	border-radius: 1%;
+	background: no-repeat;
+	background-size: cover;
+	height: 15vmax;
+	width: 15vmax;
+}

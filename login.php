@@ -40,7 +40,7 @@
 				if ($result['email'] != $mail) {
 					echo 'This account does not exist';
 				}
-				if (password_verify($pass, $result['encrypt'])) {
+				else if (password_verify($pass, $result['encrypt'])) {
 					$_SESSION['logged_in'] = $mail;
 					header("Location: index.php");
 				}

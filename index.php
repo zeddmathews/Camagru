@@ -13,13 +13,15 @@
 		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
-		try {
-			$query = $conn->prepare("SELECT * FROM users WHERE email = ?");
-			$query->execute(array($_SESSION['logged_in']));
-			$result = $query->fetch(PDO::FETCH_ASSOC);
-		}
-		catch(PDOException $e) {
-			echo $e->getMessage();
+		if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
+			try {
+				$query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+				$query->execute(array($_SESSION['logged_in']));
+				$result = $query->fetch(PDO::FETCH_ASSOC);
+			}
+			catch(PDOException $e) {
+				echo $e->getMessage();
+			}
 		}
 		?>
 <!DOCTYPE html>
@@ -32,18 +34,15 @@
 	<script src="js/camera.js"></script>
 	<title>Feed</title>
 	<style>
-		.img
-		{
-			/* border: 10px solid red; */
-			/* background: no-repeat; */
-			/* background-size: cover; */
-			height: 25vh;
-			width: 12.5vw;
-		}
+		
 	</style>
 </head>
 <body onload="init();">
-	<h3>Welcome <?php echo $result['username']?></h3>
+	<h3>Welcome to Camagru<?php 
+	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
+		echo ' '.$result['username'];
+	}
+	?></h3>
 	<img src="" id="image"/>
 	<br>
 	<?php

@@ -56,7 +56,7 @@
 
 <?php
 require('config/pdo_connection.php');
-if ($_POST) {
+if (filter_has_var(INPUT_POST, 'Register')) {
 	$pass1 = trim(htmlspecialchars($_POST['password_1']));
 	$pass2 = trim(htmlspecialchars($_POST['password_2']));
 	$mail = trim(htmlspecialchars($_POST['email']));

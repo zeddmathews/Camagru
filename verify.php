@@ -1,3 +1,4 @@
+<?php include('header.php')?>
 <?php
 	session_start();
 	require('config/pdo_connection.php');
@@ -6,8 +7,12 @@
 		$token = $_GET['token'];
 		$stmt = $conn->prepare("SELECT verified FROM users WHERE token = ?");
 		$stmt->execute(array($token));
-		if ($stmt->fetchColumn() === 1) {
+		$comp = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($comp['verified'] == 1) {
 			echo 'Already verified';
+			?>
+			<a href="login.php">Login</a>
+			<?php
 			exit ;
 		}
 		else {
@@ -28,3 +33,4 @@
 		echo 'Well done'."<br>".'You caused this shit:'.$e->getMessage();
 	}
 ?>
+<?php include('footer.php')?>
