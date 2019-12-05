@@ -15,7 +15,7 @@
 	<title>Feed</title>
 </head>
 <body onload="init();">
-	<h3>Display (preferably) pretty shit</h3>
+	<h3>Add/Take pictures</h3>
 	<form action="" method="post" enctype="multipart/form-data">
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
