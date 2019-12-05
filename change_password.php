@@ -9,7 +9,10 @@
 			$stmt->execute(array($verify));
 			$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
 			if ($fetch['email'] == $verify) {
-				$msg = 'Click the following link to reset your password: http://localhost:8080/Camagru/re-verify.php?email='.$verify;
+				$token = md5($verify);
+				$update = $conn->prepare("UPDATE users SET token = ? WHERE email = ?");
+				$update->execute(array($token, $verify));
+				$msg = 'Click the following link to reset your password: http://localhost:8080/Camagru/re-verify.php?email='.$verify.'&token='.$token;
 				mail($verify, 'Reset password', $msg);
 				echo 'An email with a reset link has been sent to you';
 			}
