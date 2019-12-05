@@ -57,6 +57,9 @@
 
 <?php
 require('config/pdo_connection.php');
+if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
+	header("Location: index.php");
+}
 if (filter_has_var(INPUT_POST, 'Register')) {
 	$pass1 = trim(htmlspecialchars($_POST['password_1']));
 	$pass2 = trim(htmlspecialchars($_POST['password_2']));
@@ -69,33 +72,25 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 	// $low = preg_match('@[a-z]@', $pass1);
 	// $num = preg_match('@[0-9]@', $pass1);
 	// $spec = preg_match('@[^\w]@', $pass1);
-	if(empty($first) || empty($last) || empty($user) || empty($mail) || empty($pass1) || empty($pass2)) {
+	if (empty($first) || empty($last) || empty($user) || empty($mail) || empty($pass1) || empty($pass2)) {
 		echo "<label>Please fill in all fields</label>";
 		exit ;
 	}
 
-	// if (!$upp) {
+	// else if (!$upp) {
 	// 	echo 'No uppercase letters<br>';
 	// }
-	// if (!$low) {
+	// else if (!$low) {
 	// 	echo 'No lowercase letters<br>';
 	// }
-	// if (!$num) {
+	// else if (!$num) {
 	// 	echo 'No numbers<br>';
 	// }
-	// if (!$spec) {
+	// else if (!$spec) {
 	// 	echo 'No special characters<br>';
 	// }
-	// if (strlen($pass1) < 8) {
+	// else if (strlen($pass1) < 8) {
 	// 	echo 'Password too short<br>';
-	// }
-	// if (!$upp || !$low || !$num || !$spec || strlen($pass1) < 8) {
-	// 	echo 'Password shoulbe be at least 8 characters in length and should include
-	// 	at least one upper case letter, one lower case letter, one number, and one special character.<br>';
-	// 	exit ;
-	// }
-	// else {
-	// 	echo 'Meh password<br>';
 	// }
 	if ($pass1 != $pass2) {
 		echo 'Passwords do not match<br>';

@@ -34,6 +34,9 @@
 
 <?php
 	require('config/pdo_connection.php');
+	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
+		header("Location: index.php");
+	}
 	if (filter_has_var(INPUT_POST, 'Login')) {
 		$mail = trim(htmlspecialchars($_POST['email']));
 		$pass = trim(htmlspecialchars($_POST['password']));

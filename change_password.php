@@ -9,10 +9,12 @@
 			$stmt->execute(array($verify));
 			$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
 			if ($fetch['email'] == $verify) {
-				echo 'no yoooouuuu';
+				$msg = 'Click the following link to reset your password: http://localhost:8080/Camagru/re-verify.php?email='.$verify;
+				mail($verify, 'Reset password', $msg);
+				echo 'An email with a reset link has been sent to you';
 			}
 			else {
-				echo 'rip';
+				echo 'This account does not exist';
 			}
 		}
 		catch(PDOException $e) {
@@ -30,7 +32,7 @@
 	<link rel="stylesheet" href="css/camagru.css">
 </head>
 <body>
-	<form>
+	<form class="change-form" action="" method="post">
 		<input type="email" name="Verify" placeholder="Verify your email" required>
 		<br>
 		<button type="submit" name="verify">Verify</button>
