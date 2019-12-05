@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Signup</title>
+	<link rel="stylesheet" href="css/camagru.css">
 </head>
 <body>
 	<form class="signup-form" action="" method="post">
@@ -46,6 +47,7 @@
 
 		<label>Already have an account?</label>
 		<button type="button"><a href="login.php">Login</a></button>
+		<br>
 		<button type="button"><a href="change_password.php">Forgotten password?</a></button>
 	</form>
 </body>

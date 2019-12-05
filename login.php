@@ -22,6 +22,10 @@
 		<br>
 
 		<button type="submit" name="Login">Login</button>
+		<br>
+		<button type="button"><a href="signup.php">Sign Up</a></button>
+		<br>
+		<button type="button"><a href="change_password.php">Forgotten password?</a></button>
 	</form>
 </body>
 </html>

@@ -55,3 +55,6 @@ body{
 	height: 15vmax;
 	width: 15vmax;
 }
+button {
+	text-decoration: none;
+}
