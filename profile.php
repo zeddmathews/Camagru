@@ -48,6 +48,30 @@
 				else if ($new_email == $compare['email']) {
 					echo 'Email already taken';
 				}
+				// $upp = preg_match('@[A-Z]@', $new_pass);
+				// $low = preg_match('@[a-z]@', $new_pass);
+				// $num = preg_match('@[0-9]@', $new_pass);
+				// $spec = preg_match('@[^\w]@', $new_pass);
+				// else if (!$upp) {
+				// 	echo 'No uppercase letters<br>';
+				// }
+				// else if (!$low) {
+				// 	echo 'No lowercase letters<br>';
+				// }
+				// else if (!$num) {
+				// 	echo 'No numbers<br>';
+				// }
+				// else if (!$spec) {
+				// 	echo 'No special characters<br>';
+				// }
+				// else if (strlen($pass1) < 8) {
+				// 	echo 'Password too short<br>';
+				// }
+				// if (!$upp || !$low || !$num || !$spec || strlen($pass1) < 8) {
+				// 	echo 'Password shoulbe be at least 8 characters in length and should include
+				// 	at least one upper case letter, one lower case letter, one number, and one special character.<br>';
+				// 	exit ;
+				// }
 				else if ($new_pass != $new_pass2) {
 					echo 'Please enter matching passwords';
 				}
@@ -85,21 +109,27 @@
 </head>
 <body>
 	<form class="update-info" action="" method="post">
-		<h3>Update your information</h3>
-		<br>
+		<h2>Update your information</h2>
 		<input type="text" name="current_user" placeholder="Username" required>
+		<br>
 		<br>
 		<input type="email" name="current_email" placeholder="Email" required>
 		<br>
+		<br>
 		<input type="password" name="current_password" placeholder="Password" required>
+		<br>
 		<br>
 		<input type="text" name="new_user" placeholder="New Username" required>
 		<br>
+		<br>
 		<input type="email" name="new_email" placeholder="New Email" required>
+		<br>
 		<br>
 		<input type="password" name="new_password" placeholder="New Password" required>
 		<br>
+		<br>
 		<input type="password" name="new_password2" placeholder="Comfirm New Password" required>
+		<br>
 		<br>
 		<button type="submit" name="Update">Update</button>
 	</form>

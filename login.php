@@ -1,5 +1,5 @@
 <?php include('header.php')?>
-<h1>Login</h1>
+<h2>Login</h2>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,7 @@
 
 		<br>
 
+		<br>
 		<input type="password" name="password" placeholder="Password" required>
 
 		<br>
@@ -42,6 +43,8 @@
 				}
 				else if (password_verify($pass, $result['encrypt'])) {
 					$_SESSION['logged_in'] = $mail;
+					$msg = 'You logged in on '.date("Y.m.d").' at '.date("h:i:sa").'.';
+					mail($mail, 'You logged in', $msg);
 					header("Location: index.php");
 				}
 			}

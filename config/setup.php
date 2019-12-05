@@ -39,7 +39,7 @@
 
 	// Create default user
 	try {
-		$password = 'ftg150Fu#';
+		$password = 'noyou';
 		$lemail = 'iam@groot.com';
 		$firsty = 'I';
 		$lasty = 'Am';

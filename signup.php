@@ -11,7 +11,6 @@
 </head>
 <body>
 	<form class="signup-form" action="" method="post">
-		<br>
 		<input type="text" name="firstname" placeholder="Name" required>
 
 		<br>
@@ -136,7 +135,7 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 			else {
 				echo 'Duplicate entries';
 			}
-			
+
 		}
 		catch (PDOException $e){
 			echo $sql ."<br>". $e->getMessage();
