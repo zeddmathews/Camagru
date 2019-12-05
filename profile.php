@@ -64,10 +64,10 @@
 				// else if (!$spec) {
 				// 	echo 'No special characters<br>';
 				// }
-				// else if (strlen($pass1) < 8) {
+				// else if (strlen($new_pass) < 8) {
 				// 	echo 'Password too short<br>';
 				// }
-				// if (!$upp || !$low || !$num || !$spec || strlen($pass1) < 8) {
+				// if (!$upp || !$low || !$num || !$spec || strlen($new_pass) < 8) {
 				// 	echo 'Password shoulbe be at least 8 characters in length and should include
 				// 	at least one upper case letter, one lower case letter, one number, and one special character.<br>';
 				// 	exit ;
