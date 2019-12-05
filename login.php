@@ -42,13 +42,18 @@
 				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 				$stmt->execute(array($mail));
 				$result = $stmt->fetch(PDO::FETCH_ASSOC);
-				if ($result['email'] != $mail) {
+				if ($result['verified'] == "0") {
+					echo 'Please verify your account';
+				}
+				else if ($result['email'] != $mail) {
 					echo 'This account does not exist';
 				}
 				else if (password_verify($pass, $result['encrypt'])) {
 					$_SESSION['logged_in'] = $mail;
-					$msg = 'You logged in on '.date("Y.m.d").' at '.date("h:i:sa").'.';
-					mail($mail, 'You logged in', $msg);
+					if ($result['notifications'] == "1") {
+						$msg = 'You logged in to your Camagru account on '.date("Y.m.d").' at '.date("h:i:sa").'.';
+						mail($mail, 'You logged in', $msg);
+					}
 					header("Location: index.php");
 				}
 			}

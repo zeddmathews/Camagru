@@ -16,12 +16,13 @@
 			exit ;
 		}
 		else {
-			$update = $conn->prepare("UPDATE users SET verified = 1 WHERE token = :token");
+			$update = $conn->prepare("UPDATE users SET verified = 1, notifications = 1 WHERE token = :token");
 			$update->bindParam(':token', $token);
 			$update->execute();
 			$stmt = $conn->prepare("SELECT verified FROM users WHERE token = ?");
 			$stmt->execute(array($token));
-			if ($stmt->fetchColumn() === "1") {
+			$test = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($test['verified'] == "1") {
 				header("Location: login.php");
 			}
 			else {
