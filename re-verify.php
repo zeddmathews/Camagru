@@ -12,7 +12,7 @@
 		$check->execute(array($email));
 		$comp = $check->fetch(PDO::FETCH_ASSOC);
 		if ($comp['token'] == $token) {
-			echo 'Account verified';
+			echo 'Account verified'."<br>";
 		}
 		else {
 			echo 'Oops';
@@ -21,10 +21,32 @@
 	catch(PDOException $e) {
 		echo $e->getMessage();
 	}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>New Password</title>
+	<link rel="stylesheet" href="css/camagru.css">
+</head>
+<body>
+	<form class="new-pass-form" action="" method="post">
+		<input type="password" name="new_password" placeholder="New Password">
+		<br>
+		<br>
+		<input type="password" name="conf_new_pass" placeholder="Confirm Password">
+		<br>
+		<button type="submit" name="update_password">Update Password</button>
+	</form>
+</body>
+</html>
+<?php
 	if (filter_has_var(INPUT_POST, 'update_password')) {
 		$new_pass = trim(htmlspecialchars($_POST['new_password']));
 		$conf_pass = trim(htmlspecialchars($_POST['conf_new_pass']));
-		if (!empty($new_pass && !empty($conf_pass))) {
+		if (!empty($new_pass) && !empty($conf_pass)) {
 			try {
 				// $upp = preg_match('@[A-Z]@', $new_pass);
 				// $low = preg_match('@[a-z]@', $new_pass);
@@ -48,16 +70,22 @@
 				if ($new_pass != $conf_pass) {
 					echo 'Passwords do not match';
 				}
-				else {
+				else if ($new_pass == $conf_pass) {
 					$encrypt = password_hash($new_pass, PASSWORD_BCRYPT);
 					$update = $conn->prepare("UPDATE users SET encrypt = ? WHERE email = ?");
 					$update->execute(array($encrypt, $email));
-					$fetch = $update->fetch(PDO::FETCH_ASSOC);
-					var_dump($fetch['encrypt']);
-					if (password_verify($encrypt, $fetch['encrypt'])) {
+					$fetch = $conn->prepare("SELECT * FROM users WHERE email = ?");
+					$fetch->execute(array($email));
+					$print = $fetch->fetch(PDO::FETCH_ASSOC);
+					if (password_verify($new_pass, $print['encrypt'])) {
 						echo 'You have successfully changed your password.';
-						$msg = "Your password has been successfully updated";
+						$msg = 'Your password has been successfully updated, '.$print['username'];
 						mail($email, 'Password Change', $msg);
+						?>
+						<br>
+						<button><a href="login.php">Login</a></button>
+						<?php
+						$changed = 1;
 					}
 					else {
 						echo 'Rip';
@@ -70,23 +98,4 @@
 		}
 	}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>New Password</title>
-	<link rel="stylesheet" href="css/camagru.css">
-</head>
-<body>
-	<form class="new-pass-form" action="" method="post">
-		<input type="password" name="new_password" placeholder="New Password">
-		<br>
-		<input type="password" name="conf_new_pass" placeholder="Confirm Password">
-		<br>
-		<button type="submit" name="update_password">Update Password</button>
-	</form>
-</body>
-</html>
 <?php include('footer.php')?>
