@@ -54,6 +54,14 @@
 					$update->execute(array($encrypt, $email));
 					$fetch = $update->fetch(PDO::FETCH_ASSOC);
 					var_dump($fetch['encrypt']);
+					if (password_verify($encrypt, $fetch['encrypt'])) {
+						echo 'You have successfully changed your password.';
+						$msg = "Your password has been successfully updated";
+						mail($email, 'Password Change', $msg);
+					}
+					else {
+						echo 'Rip';
+					}
 				}
 			}
 			catch(PDOException $e) {
