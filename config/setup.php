@@ -95,7 +95,7 @@
 		$sql = "CREATE TABLE IF NOT EXISTS likes (
 			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			postedby VARCHAR(200),
-			likedby VARCHAR(200),
+			-- likedby VARCHAR(200),
 			totallikes INT(250)
 		)";
 		$conn->exec($sql);

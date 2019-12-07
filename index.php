@@ -51,7 +51,7 @@
 				<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
 				<br>
 				<button onclick="likes(<?php echo $imgs['id']?>);">Like</button>
-				<p> 1 </p>
+		FIX THIS		<p> 1 </p>
 			<?php
 			}
 	?>
