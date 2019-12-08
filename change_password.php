@@ -1,6 +1,6 @@
 <?php include('header.php')?>
 <?php
-	require('config/pdo_connection.php');
+	// require('config/pdo_connection.php');
 
 	if(filter_has_var(INPUT_POST, 'verify')) {
 		$verify = trim(htmlspecialchars($_POST['Verify']));

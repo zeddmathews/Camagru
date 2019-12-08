@@ -1,7 +1,7 @@
 <?php include('header.php');?>
 
 <?php
-	require('config/pdo_connection.php');
+	// require('config/pdo_connection.php');
 	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 		header("Location: login.php");
 	}
@@ -108,30 +108,71 @@
 	<title>Profile</title>
 </head>
 <body>
-	<form class="update-info" action="" method="post">
-		<h2>Update your information</h2>
-		<input type="text" name="current_user" placeholder="Username" required>
+	<form class="update-username" action="" method="post">
+		<h2>Update your username</h2>
+		<input type="text" name="user_curr_user" placeholder="Username" required>
 		<br>
 		<br>
-		<input type="email" name="current_email" placeholder="Email" required>
-		<br>
-		<br>
-		<input type="password" name="current_password" placeholder="Password" required>
+		<input type="password" name="user_curr_pass" placeholder="Password" required>
 		<br>
 		<br>
 		<input type="text" name="new_user" placeholder="New Username" required>
 		<br>
 		<br>
-		<input type="email" name="new_email" placeholder="New Email" required>
+		<button type="submit" name="Update-username">Update</button>
+	</form>
+	<?php
+		if (filter_has_var(INPUT_POST, 'Update-username')) {
+			$ucu = trim(htmlspecialchars($_POST['user_curr_user']));
+			$ucp = trim(htmlspecialchars($_POST['user_curr_pass']));
+			$nu = trim(htmlspecialchars($_POST['new_user']));
+			if (empty($ucu) || empty($ucp) || empty($nu)) {
+				echo 'Please fill in all fields';
+			}
+			else if (!empty($ucu) && !empty($ucp) && !empty($nu)){
+				$scan_all = $conn->prepare("SELECT * FROM users WHERE username = ? AND email = ?");
+				$scan_all->execute(array($row['username'], $row['email']));
+				$compare = $scan_all->fetch(PDO::FETCH_ASSOC);
+				if ($ucu != $row['username']) {
+					echo 'Incorrect username';
+				}
+				else if (!(password_verify($ucp, $row['encrypt']))) {
+					echo 'Incorrect password';
+				}
+				else if ($nu == $compare['username']) {
+					echo 'Username already taken';
+				}
+				else {
+					echo 'Try stuff';
+				}
+			}
+		}
+	?>
+	<form class="update-password" action="" method="post">
+		<h2>Update your password</h2>
+		<input type="password" name="pass_curr_pass" placeholder="Password" required>
 		<br>
 		<br>
-		<input type="password" name="new_password" placeholder="New Password" required>
+		<input type="password" name="new_pass" placeholder="New Password" required>
 		<br>
 		<br>
-		<input type="password" name="new_password2" placeholder="Comfirm New Password" required>
+		<input type="password" name="new_pass2" placeholder="Comfirm New Password" required>
 		<br>
 		<br>
-		<button type="submit" name="Update">Update</button>
+		<button type="submit" name="Update-password">Update</button>
+	</form>
+	<form class="update-email" action="" method="post">
+		<h2>Update your email</h2>
+		<input type="email" name="mail_curr_mail" placeholder="Email" required>
+		<br>
+		<br>
+		<input type="email" name="new_mail" placeholder="New Email" required>
+		<br>
+		<br>
+		<input type="password" name="mail_curr_pass" placeholder="Password" required>
+		<br>
+		<br>
+		<button type="submit" name="Update-email">Update</button>
 	</form>
 </body>
 </html>

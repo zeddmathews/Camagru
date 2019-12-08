@@ -1,6 +1,12 @@
 <?php include('header.php');?>
+<?php 
+	if (!isset($_SESSION['created'])) {
+		header("Location: config/setup.php");	
+	}
+?>
 	<?php
-		require('config/pdo_connection.php');
+		// require('config/pdo_connection.php');
+		print_r($users);
 		if (isset($_POST['submit'])) {
 			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 				echo '<label>You are not logged in</label><br>';

@@ -1,7 +1,7 @@
 <?php include('header.php')?>
 <?php
 	session_start();
-	require('config/pdo_connection.php');
+	// require('config/pdo_connection.php');
 
 	try {
 		$token = $_GET['token'];

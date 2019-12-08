@@ -33,7 +33,7 @@
 <?php include('footer.php')?>
 
 <?php
-	require('config/pdo_connection.php');
+	// require('config/pdo_connection.php');
 	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 		header("Location: index.php");
 	}

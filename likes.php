@@ -1,6 +1,6 @@
 <?php include('header.php')?>
 <?php
-	require('config/pdo_connection');
+	// require('config/pdo_connection');
 
 	// if ()
 	// try {
