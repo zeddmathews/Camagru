@@ -7,6 +7,9 @@
 	<?php
 		// require('config/pdo_connection.php');
 		print_r($users);
+		// print_r($images);
+		// print_r($comments);
+		// print_r($likes);
 		if (isset($_POST['submit'])) {
 			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 				echo '<label>You are not logged in</label><br>';
@@ -43,7 +46,12 @@
 		
 	</style>
 </head>
-<body onload="init();">
+<body <?php 
+if($stm->rowCount() > 0) {
+	?>onload="init();"
+	<?php
+}
+	?>>
 	<h3>Welcome to Camagru<?php 
 	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 		echo ' '.$result['username'];
