@@ -6,7 +6,7 @@
 ?>
 	<?php
 		// require('config/pdo_connection.php');
-		print_r($users);
+		// print_r($users);
 		// print_r($images);
 		// print_r($comments);
 		// print_r($likes);

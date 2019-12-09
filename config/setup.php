@@ -38,13 +38,57 @@
 		echo $sql ."<br>". $e->getMessage();
 	}
 
-	// Create default user
+	// Create default users
 	try {
 		$password = 'noyou';
 		$lemail = 'iam@groot.com';
 		$firsty = 'I';
 		$lasty = 'Am';
 		$usery = 'Groot';
+		$token = md5($usery);
+		$encrypt = password_hash($password, PASSWORD_BCRYPT);
+		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':firsty', $firsty);
+		$stmt->bindParam(':lasty', $lasty);
+		$stmt->bindParam(':usery', $usery);
+		$stmt->bindParam(':lemail', $lemail);
+		$stmt->bindParam(':encrypt', $encrypt);
+		$stmt->bindParam(':token', $token);
+		$stmt->execute();
+	}
+	catch (PDOException $e){
+		echo $sql ."<br>". $e->getMessage();
+	}
+	try {
+		$password = 'begone';
+		$lemail = 'pika@chu.com';
+		$firsty = 'Pika';
+		$lasty = 'Pi';
+		$usery = 'Pichu';
+		$token = md5($usery);
+		$encrypt = password_hash($password, PASSWORD_BCRYPT);
+		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':firsty', $firsty);
+		$stmt->bindParam(':lasty', $lasty);
+		$stmt->bindParam(':usery', $usery);
+		$stmt->bindParam(':lemail', $lemail);
+		$stmt->bindParam(':encrypt', $encrypt);
+		$stmt->bindParam(':token', $token);
+		$stmt->execute();
+	}
+	catch (PDOException $e){
+		echo $sql ."<br>". $e->getMessage();
+	}
+	try {
+		$password = 'default';
+		$lemail = 'nub@noob.com';
+		$firsty = 'Nubly';
+		$lasty = 'Noob';
+		$usery = 'Default';
 		$token = md5($usery);
 		$encrypt = password_hash($password, PASSWORD_BCRYPT);
 		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
