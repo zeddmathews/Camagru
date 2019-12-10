@@ -112,6 +112,7 @@
 			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			imagename VARCHAR(200) NOT NULL,
 			username VARCHAR (100) NOT NULL,
+			email VARCHAR(200) NOT NULL,
 			created VARCHAR(200) NOT NULL
 		)";
 		$conn->exec($sql);

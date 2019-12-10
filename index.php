@@ -32,6 +32,9 @@
 				echo $e->getMessage();
 			}
 		}
+		if (filter_has_var(INPUT_POST, 'delete')) {
+
+		}
 		?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +70,11 @@ if($stm->rowCount() > 0) {
 				<button onclick="likes(<?php echo $imgs['id']?>);">Like</button>
 		FIX THIS		<p> 1 </p>
 			<?php
+				if ($_SESSION['logged_in'] == $imgs['email']) {
+					?>
+					Give button
+					<?php
+				}
 			}
 	?>
 
