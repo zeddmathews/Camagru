@@ -31,8 +31,6 @@
 		$print = $fetch->fetch(PDO::FETCH_ASSOC);
 		$stmt = $conn->prepare("INSERT INTO images(`imagename`, `username`, `email`, `created`) VALUES(?, ?, ?, ?)");
 		$stmt->execute(array($file_name, $print['username'], $_SESSION['logged_in'], 1));
-		$likes = $conn->prepare("INSERT INTO likes(`postedby`, `totallikes`) VALUES(?, ?)");
-		$likes->execute(array($file_name, 0));
 	}
 	catch (PDOException $e) {
 		echo 'No you'."<br>".$e->getMessage();

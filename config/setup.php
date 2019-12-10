@@ -140,16 +140,11 @@
 	// Build table 'Likes'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS likes (
-			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			postedby VARCHAR(200),
-			-- likedby VARCHAR(200),
-			totallikes INT(250)
-
 			like_id INT AUTO_INCREMENT PRIMARY KEY,
 			user_id INT NOT NULL,
 			post_id INT NOT NULL,
 			FOREIGN KEY (user_id) REFERENCES users(id),
-			FOREIGN KEY (post_id) REFERENCES posts(post_id)
+			FOREIGN KEY (post_id) REFERENCES images(id)
 		)";
 		$conn->exec($sql);
 		echo "Phenomenally functional shit<br>";
