@@ -43,7 +43,7 @@
 		if (!empty($mail) && !empty($pass)) {
 			try {
 				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-				$stmt->execute(array($mail, $mail));
+				$stmt->execute(array($mail));
 				$result = $stmt->fetch(PDO::FETCH_ASSOC);
 				var_dump($result['username']);
 				if ($result['verified'] == "0") {
