@@ -44,8 +44,11 @@
 		?>	<a href="login.php" id="right">Login</a>
 			<a href="signup.php" id="right">Sign Up</a>
 	<?php
-	} else {
-		?>	<a href="profile.php" id="right">Profile</a>
+	}
+	else {
+		?>	
+			<a href="personal_gallery.php" id="right">My Gallery</a>
+			<a href="profile.php" id="right">Profile</a>
 			<a href="camera.php" id="right">Camera</a>
 			<a href="logout.php" id ="right">Logout</a>
 	<?php
