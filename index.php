@@ -33,7 +33,7 @@
 			}
 		}
 		if (filter_has_var(INPUT_POST, 'delete')) {
-
+			
 		}
 		?>
 <!DOCTYPE html>
@@ -62,21 +62,12 @@ if($stm->rowCount() > 0) {
 	?></h3>
 	<img src="" id="image"/>
 	<br>
-	<?php
-			while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
-				<h4>Posted by <?php echo $imgs['username']?></h4>
-				<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
-				<br>
-				<button onclick="likes(<?php echo $imgs['id']?>);">Like</button>
-		FIX THIS		<p> 1 </p>
-			<?php
-				if ($_SESSION['logged_in'] == $imgs['email']) {
-					?>
-					Give button
-					<?php
-				}
-			}
-	?>
+	<?php while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)):?>
+		<a href="post.php?id=<?php echo $imgs['id'];?>">
+			<h4>Posted by <?php echo $imgs['username']?></h4>
+			<img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
+		</a>
+	<?php endwhile?>
 
 </body>
 </html>
