@@ -161,30 +161,28 @@
 	else if ($get_notif['notifications'] == 0) {
 		$value = 0;
 	}
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if (isset($_POST['switchstate'])) {
 		if ($value == 1) {
 			echo 'HEY!';
 			$update_notifications = $conn->prepare("UPDATE users SET notifications = 0 WHERE email = ?");
 			$update_notifications->execute(array($mail));
-			$check_notifs = $conn->prepare("SELECT notifications FROM users WHERE email = ?");
-			$check_notifs->execute(array($mail));
-			$check_notifs->fetch(PDO::FETCH_ASSOC);
-			var_dump($check_notifs['notifications']);
+			$value = 0;
 		}
 		else if ($value == 0) {
 			echo 'YOU!';
 			$update_notifications = $conn->prepare("UPDATE users SET notifications = 1 WHERE email = ?");
-			$update_notifications->execute(array($mail));			
+			$update_notifications->execute(array($mail));
+			$value = 1;
 		}
+		die();
 	}
 	?>
-	<form id="notif_form" action="" method="post">
 		<h2>Notifications</h2>
 		<label class="switch">
 			<input type="checkbox" id="notifications" onclick="notif();" <?php if ($value == 1) {echo "checked";} ?>>
 			<span class="slider"></span>
 		</label>
-	</form>
+
 	<?php
 	// var_dump($users['email']);
 	?>

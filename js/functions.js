@@ -1,13 +1,13 @@
 function notif() {
-	document.getElementById('notif_form').submit();
-	noti = document.getElementById('notifications');
+	var noti = document.getElementById('notifications');
 
-	switchState = new XMLHttpRequest();
+	var switchState = new XMLHttpRequest();
 
 	switchState.open('POST', 'profile.php');
-	switchState.onload = function() {
-		alert(noti);
+	switchState.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	switchState.onload = function() { 
 		noti.value = 1;
+		console.log(switchState.responseText)
 	}
 	switchState.send('switchstate='+true);
 }
