@@ -10,93 +10,6 @@
 	$stmt->execute(array($mail));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	echo $row['username']."<br>";
-	// var_dump($row['email']);
-	// var_dump($row['username']);
-
-	if (filter_has_var(INPUT_POST, 'Update')) {
-		$cur_user = trim(htmlspecialchars($_POST['current_user']));
-		$cur_email = trim(htmlspecialchars($_POST['current_email']));
-		$cur_pass = trim(htmlspecialchars($_POST['current_password']));
-		$new_user = trim(htmlspecialchars($_POST['new_user']));
-		$new_email = trim(htmlspecialchars($_POST['new_email']));
-		$new_pass = trim(htmlspecialchars($_POST['new_password']));
-		$new_pass2 = trim(htmlspecialchars($_POST['new_password2']));
-
-		if ($cur_user != $row['username']) {
-			echo 'Incorrect username';
-		}
-		else if ($cur_email != $row['email']) {
-			echo 'Incorrect email';
-		}
-		else if (!(password_verify($cur_pass, $row['encrypt']))) {
-			echo 'Incorrect password';
-		}
-		else {
-			try {
-				$scan_all = $conn->prepare("SELECT * FROM users WHERE username = ? AND email = ?");
-				$scan_all->execute(array($row['username'], $row['email']));
-				$compare = $scan_all->fetch(PDO::FETCH_ASSOC);
-				if ($new_user == $row['username']) {
-					echo 'Pick a new username';
-				}
-				else if ($new_user == $compare['username']) {
-					echo 'Username already taken';
-				}
-				else if ($new_email == $row['email']) {
-					echo 'Pick a new email';
-				}
-				else if ($new_email == $compare['email']) {
-					echo 'Email already taken';
-				}
-				// $upp = preg_match('@[A-Z]@', $new_pass);
-				// $low = preg_match('@[a-z]@', $new_pass);
-				// $num = preg_match('@[0-9]@', $new_pass);
-				// $spec = preg_match('@[^\w]@', $new_pass);
-				// else if (!$upp) {
-				// 	echo 'No uppercase letters<br>';
-				// }
-				// else if (!$low) {
-				// 	echo 'No lowercase letters<br>';
-				// }
-				// else if (!$num) {
-				// 	echo 'No numbers<br>';
-				// }
-				// else if (!$spec) {
-				// 	echo 'No special characters<br>';
-				// }
-				// else if (strlen($new_pass) < 8) {
-				// 	echo 'Password too short<br>';
-				// }
-				// if (!$upp || !$low || !$num || !$spec || strlen($new_pass) < 8) {
-				// 	echo 'Password shoulbe be at least 8 characters in length and should include
-				// 	at least one upper case letter, one lower case letter, one number, and one special character.<br>';
-				// 	exit ;
-				// }
-				else if ($new_pass != $new_pass2) {
-					echo 'Please enter matching passwords';
-				}
-				else {
-					try {
-						$encrypt = password_hash($new_pass, PASSWORD_BCRYPT);
-						$update_info = $conn->prepare("UPDATE users SET username = ?, email = ?, encrypt = ?, verified = 0 WHERE username = ?");
-						$update_info->execute(array($new_user, $new_email, $new_pass, $cur_user));
-						$test = $conn->prepare("SELECT username FROM users WHERE username = ?");
-						$test->execute(array($new_user));
-						$print = $test->fetch(PDO::FETCH_ASSOC);
-						if ($print['username'] == $new_user) {
-							echo 'Details successfully updated. Please verify your new email address.';
-						}
-					}
-					catch(PDOException $e) {
-						echo $e->getMessage();
-					}
-				}
-			}
-			catch(PDOException $e) {
-				echo $e->getMessage();
-			}
-		}
-	}
 ?>
 
 <!DOCTYPE html>
@@ -233,25 +146,47 @@
 			}
 		}
 	?>
-	<form class="notifications" action="" method="post">
+	<?php
+	try {
+		$sql = $conn->prepare("SELECT * FROM users WHERE email = ?");
+		$sql->execute(array($mail));
+		$get_notif = $sql->fetch(PDO::FETCH_ASSOC);
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
+	if ($get_notif['notifications'] == 1) {
+		$value = 1;
+	}
+	else if ($get_notif['notifications'] == 0) {
+		$value = 0;
+	}
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		if ($value == 1) {
+			echo 'HEY!';
+			$update_notifications = $conn->prepare("UPDATE users SET notifications = 0 WHERE email = ?");
+			$update_notifications->execute(array($mail));
+			$check_notifs = $conn->prepare("SELECT notifications FROM users WHERE email = ?");
+			$check_notifs->execute(array($mail));
+			$check_notifs->fetch(PDO::FETCH_ASSOC);
+			var_dump($check_notifs['notifications']);
+		}
+		else if ($value == 0) {
+			echo 'YOU!';
+			$update_notifications = $conn->prepare("UPDATE users SET notifications = 1 WHERE email = ?");
+			$update_notifications->execute(array($mail));			
+		}
+	}
+	?>
+	<form id="notif_form" action="" method="post">
 		<h2>Notifications</h2>
-		<!-- <button type="submit" name="on">On</button>
-		<br>
-		<br>
-		<button type="submit" name="off">Off</button> -->
 		<label class="switch">
-			<input type="checkbox">
+			<input type="checkbox" id="notifications" onclick="notif();" <?php if ($value == 1) {echo "checked";} ?>>
 			<span class="slider"></span>
 		</label>
 	</form>
 	<?php
-	var_dump($users['email']);
-		if (filter_has_var(INPUT_POST, 'on')) {
-			// $check_on = $conn->prepare("SELECT * FROM users WHERE");
-		}
-		if (filter_has_var(INPUT_POST, 'off')) {
-
-		}
+	// var_dump($users['email']);
 	?>
 </body>
 </html>
