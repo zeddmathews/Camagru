@@ -233,6 +233,26 @@
 			}
 		}
 	?>
+	<form class="notifications" action="" method="post">
+		<h2>Notifications</h2>
+		<!-- <button type="submit" name="on">On</button>
+		<br>
+		<br>
+		<button type="submit" name="off">Off</button> -->
+		<label class="switch">
+			<input type="checkbox">
+			<span class="slider"></span>
+		</label>
+	</form>
+	<?php
+	var_dump($users['email']);
+		if (filter_has_var(INPUT_POST, 'on')) {
+			// $check_on = $conn->prepare("SELECT * FROM users WHERE");
+		}
+		if (filter_has_var(INPUT_POST, 'off')) {
+
+		}
+	?>
 </body>
 </html>
 
