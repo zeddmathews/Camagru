@@ -10,14 +10,6 @@
 	catch(PDOException $e) {
 		echo $e->getMessage();
 	}
-	try {
-		$this_user = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
-		$this_user->execute();
-	}
-	catch(PDOException $e) {
-		echo $e->getMessage();
-	}
-	$print_user = $this_user->fetch(PDO::FETCH_ASSOC);
 	while ($imgs = $stmt->fetch(PDO::FETCH_ASSOC)):?>
 		<a href="post.php?id=<?php echo $imgs['id'];?>">
 			<h4>Posted by <?php echo $imgs['username']?></h4>
