@@ -5,7 +5,7 @@
 		die ('You are not logged in');
 	}
 	try {
-		var_dump($img = $_POST['make_img']);
+		$img = $_POST['make_img'];
 		$img = base64_decode($img);
 		$img = imagecreatefromstring($img);
 		$file_name = rand(1000000, 9999999);

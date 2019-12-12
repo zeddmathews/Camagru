@@ -96,26 +96,55 @@ button {
 	background-color: #8EE4AF;
 	transition: .4s;
 	transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked + .slider {
 	background-color: #05386B;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus + .slider {
 	box-shadow: 0 0 1px #05386B;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked + .slider:before {
 	-webkit-transform: translateX(26px);
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
-  }
-  .nav_bar {
-		justify-content: space-evenly;
-		display: flex;
-	}
-	.log_nav {
-		justify-content: space-evenly;
-		display: flex;
-  }
+}
+.nav_bar {
+	justify-content: space-evenly;
+	display: flex;
+}
+.log_nav {
+	justify-content: space-evenly;
+	display: flex;
+}
+.camera {
+	display: flex;
+	justify-content: center;
+}
+.sticks {
+	width: 7.5vw;
+	height: 7.5vw;
+}
+.stickers {
+	display: flex;
+	justify-content: space-evenly;
+}
+#display_canvas {
+	width: 20vw;
+	height: 15vw;
+	display: none;
+	/* position: absolute; */
+}
+#sticks_canvas {
+	width: 20vw;
+	height: 20vw;
+	display: none;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+.overlap {
+	position: relative;
+}

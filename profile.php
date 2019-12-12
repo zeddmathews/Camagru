@@ -11,7 +11,6 @@
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	echo $row['username']."<br>";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,7 +183,6 @@
 		</label>
 
 	<?php
-	// var_dump($users['email']);
 	?>
 </body>
 </html>
