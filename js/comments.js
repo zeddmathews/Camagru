@@ -1,1 +1,3 @@
-var comment = document.getElementById('');
+function comments(username) {
+	
+};

@@ -128,7 +128,8 @@
 		$sql = "CREATE TABLE IF NOT EXISTS comments (
 			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			postedby VARCHAR(200),
-			commentedby VARCHAR(200)
+			commentedby VARCHAR(200),
+			comment VARCHAR(10000)
 		)";
 		$conn->exec($sql);
 		echo "Amazingly functional shit<br>";
