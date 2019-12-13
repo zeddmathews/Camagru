@@ -35,9 +35,9 @@
 		$comments = $st->fetch(PDO::FETCH_ASSOC);
 		
 		// Select all columns from likes
-		$s = $conn->prepare("SELECT * FROM likes");
-		$s->execute();
-		$likes = $s->fetch(PDO::FETCH_ASSOC);
+		// $s = $conn->prepare("SELECT * FROM likes");
+		// $s->execute();
+		// $likes = $s->fetch(PDO::FETCH_ASSOC);
 	}
 	
 	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
