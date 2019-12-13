@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="css/camagru.css">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-	<script src="js/functions.js"></script>
+	<script src="js/notifications.js"></script>
 </head>
 <body>
 <div id="header">

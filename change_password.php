@@ -25,21 +25,9 @@
 		}
 	}
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-	<link rel="stylesheet" href="css/camagru.css">
-</head>
-<body>
-	<form class="change-form" action="" method="post">
-		<input type="email" name="Verify" placeholder="Verify your email" required>
-		<br>
-		<button type="submit" name="verify">Verify</button>
-	</form>
-</body>
-</html>
+<form class="change-form" action="" method="post">
+	<input type="email" name="Verify" placeholder="Verify your email" required>
+	<br>
+	<button type="submit" name="verify">Verify</button>
+</form>
 <?php include('footer.php')?>

@@ -1,16 +1,5 @@
 <?php include('header.php')?>
 <h2>Signup</h2>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Signup</title>
-	<link rel="stylesheet" href="css/camagru.css">
-</head>
-<body>
 	<form class="signup-form" action="" method="post">
 		<input type="text" name="firstname" placeholder="Name" required>
 
@@ -51,9 +40,6 @@
 		<button type="button"><a href="change_password.php">Forgotten password?</a></button>
 	</form>
 </body>
-</html>
-
-<?php include('footer.php')?>
 
 <?php
 // require('config/pdo_connection.php');
@@ -67,7 +53,7 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 	$first = trim(htmlspecialchars($_POST['firstname']));
 	$last = trim(htmlspecialchars($_POST['lastname']));
 	$user = trim(htmlspecialchars($_POST['username']));
-
+	
 	// $upp = preg_match('@[A-Z]@', $pass1);
 	// $low = preg_match('@[a-z]@', $pass1);
 	// $num = preg_match('@[0-9]@', $pass1);
@@ -76,44 +62,44 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 		echo "<label>Please fill in all fields</label>";
 		exit ;
 	}
-
+	
 	// else if (!$upp) {
-	// 	echo 'No uppercase letters<br>';
-	// }
-	// else if (!$low) {
-	// 	echo 'No lowercase letters<br>';
-	// }
-	// else if (!$num) {
-	// 	echo 'No numbers<br>';
-	// }
-	// else if (!$spec) {
-	// 	echo 'No special characters<br>';
-	// }
-	// else if (strlen($pass1) < 8) {
-	// 	echo 'Password too short<br>';
-	// }
-	if ($pass1 != $pass2) {
-		echo 'Passwords do not match<br>';
-		exit ;
-	}
-	// try {
-	// 	// Matching user to avoid duplicates
-	// }
-	// catch (PDOException $e){
-	// 	echo 'You dun fucked up:'. $e->getMessage();
-	// }
-	if ($pass1 == $pass2) {
-		try {
-			$encrypt = password_hash($pass1, PASSWORD_BCRYPT);
-			$token = md5($_POST['username']);
-			$match = $conn->prepare("SELECT * FROM users WHERE email = :mail");
-			$match->bindParam(':mail', $mail);
-			$match->execute();
-			$cmp = $match->fetchAll();
-			$match = $conn->prepare("SELECT * FROM users WHERE username = :user");
-			$match->bindParam(':user', $user);
-			$cmp2 = $match->fetchAll();
-			if (sizeof($cmp) == 0 && sizeof($cmp2) == 0) {
+		// 	echo 'No uppercase letters<br>';
+		// }
+		// else if (!$low) {
+			// 	echo 'No lowercase letters<br>';
+			// }
+			// else if (!$num) {
+				// 	echo 'No numbers<br>';
+				// }
+				// else if (!$spec) {
+					// 	echo 'No special characters<br>';
+					// }
+					// else if (strlen($pass1) < 8) {
+						// 	echo 'Password too short<br>';
+						// }
+						if ($pass1 != $pass2) {
+							echo 'Passwords do not match<br>';
+							exit ;
+						}
+						// try {
+							// 	// Matching user to avoid duplicates
+							// }
+							// catch (PDOException $e){
+								// 	echo 'You dun fucked up:'. $e->getMessage();
+								// }
+								if ($pass1 == $pass2) {
+									try {
+										$encrypt = password_hash($pass1, PASSWORD_BCRYPT);
+										$token = md5($_POST['username']);
+										$match = $conn->prepare("SELECT * FROM users WHERE email = :mail");
+										$match->bindParam(':mail', $mail);
+										$match->execute();
+										$cmp = $match->fetchAll();
+										$match = $conn->prepare("SELECT * FROM users WHERE username = :user");
+										$match->bindParam(':user', $user);
+										$cmp2 = $match->fetchAll();
+										if (sizeof($cmp) == 0 && sizeof($cmp2) == 0) {
 				$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
 				VALUES (:first, :last, :user, :mail, :encrypt, false, false, :token)";
 				$stmt = $conn->prepare($sql);
@@ -132,7 +118,7 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 			else {
 				echo 'Duplicate entries';
 			}
-
+			
 		}
 		catch (PDOException $e){
 			echo $sql ."<br>". $e->getMessage();
@@ -145,3 +131,4 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 }
 $conn = null;
 ?>
+<?php include('footer.php')?>

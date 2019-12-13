@@ -6,9 +6,15 @@
 	}
 	try {
 		$img = $_POST['make_img'];
+		$sticks = $_POST['make_sticks'];
 		$img = base64_decode($img);
 		$img = imagecreatefromstring($img);
+		$sticks = base64_decode($sticks);
+		$sticks = imagecreatefromstring($sticks);
 		$file_name = rand(1000000, 9999999);
+
+		imagecopy($img, $sticks, 0, 0, 0, 0, 500, 500);
+
 		$check_exists = $conn->prepare("SELECT * FROM images WHERE imagename = ?");
 		$check_exists->execute(array($file_name . ".png"));
 		while ($check_exists->rowCount())

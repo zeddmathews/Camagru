@@ -25,9 +25,14 @@
 <img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
 <form class="edit-form" action="" method="post">
 	<button type="submit" name="like">Like</button>
+	<br>
 <?php if ($_SESSION['logged_in'] == $imgs['email']): ?>
 	<button type="submit" name="delete">Delete</button>
+	<br>
 <?php endif?>
+	<input type="text" placeholder="Comment...">
+	<br>
+	<button type="submit" name="comment">Comment</button>
 </form>
 <?php?>
 <?php include('footer.php')?>

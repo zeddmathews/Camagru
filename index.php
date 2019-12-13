@@ -4,57 +4,31 @@
 		header("Location: config/setup.php");	
 	}
 ?>
-	<?php
-		// require('config/pdo_connection.php');
-		// print_r($users);
-		// print_r($images);
-		// print_r($comments);
-		// print_r($likes);
-		if (isset($_POST['submit'])) {
-			if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
-				echo '<label>You are not logged in</label><br>';
-			}
+<?php
+	if (isset($_POST['submit'])) {
+		if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
+			echo '<label>You are not logged in</label><br>';
 		}
+	}
+	try {
+		$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
+		$stmt->execute();
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
+	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 		try {
-			$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC");
-			$stmt->execute();
+			$query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+			$query->execute(array($_SESSION['logged_in']));
+			$result = $query->fetch(PDO::FETCH_ASSOC);
 		}
 		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
-		if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
-			try {
-				$query = $conn->prepare("SELECT * FROM users WHERE email = ?");
-				$query->execute(array($_SESSION['logged_in']));
-				$result = $query->fetch(PDO::FETCH_ASSOC);
-			}
-			catch(PDOException $e) {
-				echo $e->getMessage();
-			}
-		}
-		if (filter_has_var(INPUT_POST, 'delete')) {
-			
-		}
-		?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel ="stylesheet" href="css/camagru.css">
-	<script src="js/camera.js"></script>
-	<title>Feed</title>
-	<style>
-		
-	</style>
-</head>
-<body <?php 
-if($stm->rowCount() > 0) {
-	?>onload="init();"
-	<?php
-}
-	?>>
+	}
+?>
+<body>
 	<h3>Welcome to Camagru<?php 
 	if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 		echo ' '.$result['username'];
