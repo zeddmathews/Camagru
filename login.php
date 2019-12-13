@@ -53,6 +53,7 @@
 				}
 				else if (password_verify($pass, $result['encrypt'])) {
 					$_SESSION['logged_in'] = $mail;
+					$_SESSION['user'] = $result['username'];
 					if ($result['notifications'] == "1") {
 						$msg = 'You logged in to your Camagru account on '.date("Y.m.d").' at '.date("h:i:sa").'.';
 						mail($mail, 'You logged in', $msg);

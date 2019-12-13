@@ -149,7 +149,7 @@
 	// 	)";
 	// 	$conn->exec($sql);
 	// 	echo "Phenomenally functional shit<br>";
-	// 	header("Location: ../index.php");
+		header("Location: ../index.php");
 	// }
 	// catch(PDOException $e) {
 	// 	echo $e->getMessage();
