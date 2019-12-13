@@ -139,7 +139,7 @@ input:checked + .slider:before {
 }
 #sticks_canvas {
 	width: 20vw;
-	height: 20vw;
+	height: 15vw;
 	display: none;
 	top: 0;
 	left: 0;
