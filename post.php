@@ -30,6 +30,8 @@
 			try {
 				$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment) VALUES(?, ?, ?)");
 				$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment));
+				$msg = $_SESSION['user'].'commented: '.$comment.' on the image: '.$imgs['imagename'].'.';
+				mail($imgs['email'], 'Comment', $msg);
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();

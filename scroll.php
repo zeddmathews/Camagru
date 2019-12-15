@@ -6,6 +6,7 @@
 ?>
 <?php
 $load_id = $_GET['load_id'];
+var_dump($load_id);
 $offset = ($load_id - 1) * 5;
 try {
 		$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC LIMIT 5 OFFSET :offset");
