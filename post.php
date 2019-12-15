@@ -30,8 +30,13 @@
 			try {
 				$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment) VALUES(?, ?, ?)");
 				$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment));
-				$msg = $_SESSION['user'].'commented: '.$comment.' on the image: '.$imgs['imagename'].'.';
-				mail($imgs['email'], 'Comment', $msg);
+				$check_notif = $conn->prepare("SELECT * FROM users WHERE email = ?");
+				$check_notif->execute(array($_SESSION['logged_in']));
+				$is_on = $check_notif->fetch(PDO::FETCH_ASSOC);
+				if ($is_on['notifications'] == "1") {
+					$msg = $_SESSION['user'].'commented: '.$comment.' on the image: '.$imgs['imagename'].'.';
+					mail($imgs['email'], 'Comment', $msg);
+				}
 			}
 			catch(PDOException $e) {
 				echo $e->getMessage();
