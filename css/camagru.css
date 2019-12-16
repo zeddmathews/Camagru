@@ -128,7 +128,7 @@ input:checked + .slider:before {
 	height: 7.5vw;
 }
 .stickers {
-	display: flex;
+	display: none;
 	justify-content: space-evenly;
 }
 #display_canvas {
@@ -147,4 +147,7 @@ input:checked + .slider:before {
 }
 .overlap {
 	position: relative;
+}
+#save {
+	display: none;
 }

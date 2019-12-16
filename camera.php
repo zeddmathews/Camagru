@@ -11,6 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script src="js/camera.js"></script>
+	<script src="js/show_stickers.js"></script>
 	<title>Feed</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
 		<input type="file" name="img_up" id="img_up">
 		<input type="submit" name="submit" value="Upload Image">
 	</form>
-	<button id="capture">Capture</button>
+	<button id="capture" onclick="showStickers();">Capture</button>
 	<button id="save">Save</button>
 	<div class="camera">
 		<video autoplay = true id="video"></video>
@@ -29,7 +30,7 @@
 		</div>
 		<img src="" id="image"/>
 	</div>
-	<div class="stickers">
+	<div class="stickers" id="stickers">
 		<img class="sticks" id="1stick" src="image/stickers/pissed_off_gandaft.png">
 		<img class="sticks" id="2stick" src="image/stickers/bilbo.png">
 		<img class="sticks" id="3stick" src="image/stickers/legolas.png">

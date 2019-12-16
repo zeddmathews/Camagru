@@ -47,19 +47,19 @@ window.addEventListener("load", () => {
 			video.style.display = "none"
 		});
 		onestick.addEventListener("click", () => {
-			sticksctx.drawImage(onestick, 0, 0, 100, 75);
+			sticksctx.drawImage(onestick, 0, 0, 100, 100);
 			sticker_display.src = sticksCanvas.toDataURL();
 		});
 		twostick.addEventListener("click", () => {
-			sticksctx.drawImage(twostick, 75, 75, 100, 50);
+			sticksctx.drawImage(twostick, 225, 0, 100, 100);
 			sticker_display.src = sticksCanvas.toDataURL();
 		});
 		threestick.addEventListener("click", () => {
-			sticksctx.drawImage(threestick, 150, 150, 100, 50);
+			sticksctx.drawImage(threestick, 0, 225, 100, 100);
 			sticker_display.src = sticksCanvas.toDataURL();
 		});
 		fourstick.addEventListener("click", () => {
-			sticksctx.drawImage(fourstick, 225, 225, 50, 50);
+			sticksctx.drawImage(fourstick, 225, 225, 100, 100);
 			sticker_display.src = sticksCanvas.toDataURL();
 		});
 		saveMerge.addEventListener("click", () => {
