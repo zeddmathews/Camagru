@@ -9,7 +9,9 @@ $load_id = $_GET['load_id'];
 // var_dump($load_id);
 $offset = ($load_id - 1) * 5;
 try {
-		$stmt = $conn->prepare("SELECT * FROM images ORDER BY id DESC LIMIT 5 OFFSET :offset");
+		$email = $_SESSION['logged_in'];
+		$stmt = $conn->prepare("SELECT * FROM images WHERE email = :email ORDER BY id DESC LIMIT 5 OFFSET :offset");
+		$stmt->bindParam(':email', $email);
 		$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 		$stmt->execute();
 	}
