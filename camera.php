@@ -16,12 +16,16 @@
 </head>
 <body>
 	<h3>Add/Take pictures</h3>
+	<div class="sc">
 	<form action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="img_up" id="img_up">
-		<input type="submit" name="submit" value="Upload Image">
+		<input type="file" name="ploadmage" id="ploadmage">
+		<button name="ploadbtn" id="ploadbtn">Upload</button>
 	</form>
-	<button id="capture" onclick="showStickers();">Capture</button>
-	<button id="save">Save</button>
+	</div>
+	<div class="sc">
+		<button id="capture" onclick="showStickers();">Capture</button>
+		<button id="save">Save</button>
+	</div>
 	<div class="camera">
 		<video autoplay = true id="video"></video>
 		<div class="overlap">

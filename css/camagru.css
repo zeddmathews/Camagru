@@ -151,3 +151,14 @@ input:checked + .slider:before {
 #save {
 	display: none;
 }
+h3 {
+	text-align: center;
+}
+.sc {
+	display: flex;
+	justify-content: center;
+}
+.align {
+	display: flex;
+	justify-content: center;
+}

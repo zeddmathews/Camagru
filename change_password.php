@@ -6,9 +6,9 @@
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 			$stmt->execute(array($verify));
 			$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
-			if ($fetch['verified'] == "0") {
-				echo 'Verify your account';
-			}
+			// if ($fetch['verified'] == "0") {
+			// 	echo 'Verify your account';
+			// }
 			if ($fetch['email'] == $verify) {
 				$token = md5($verify);
 				$update = $conn->prepare("UPDATE users SET token = ? WHERE email = ?");

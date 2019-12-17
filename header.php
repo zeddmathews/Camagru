@@ -18,27 +18,27 @@
 	}
 	require('config/pdo_connection.php');
 	
-	if (isset($_SESSION['created'])) {
-		// Select all columns from users
-		$stmt = $conn->prepare("SELECT * FROM users");
-		$stmt->execute();
-		$users = $stmt->fetch(PDO::FETCH_ASSOC);
+	// if (isset($_SESSION['created'])) {
+	// 	// Select all columns from users
+	// 	$stmt = $conn->prepare("SELECT * FROM users");
+	// 	$stmt->execute();
+	// 	$users = $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		// Select all columns from images
-		$stm = $conn->prepare("SELECT * FROM images");
-		$stm->execute();
-		$images = $stm->fetch(PDO::FETCH_ASSOC);
+	// 	// Select all columns from images
+	// 	$stm = $conn->prepare("SELECT * FROM images");
+	// 	$stm->execute();
+	// 	$images = $stm->fetch(PDO::FETCH_ASSOC);
 		
-		// Select all columns from comments
-		$st = $conn->prepare("SELECT * FROM comments");
-		$st->execute();
-		$comments = $st->fetch(PDO::FETCH_ASSOC);
+	// 	// Select all columns from comments
+	// 	$st = $conn->prepare("SELECT * FROM comments");
+	// 	$st->execute();
+	// 	$comments = $st->fetch(PDO::FETCH_ASSOC);
 		
-		// Select all columns from likes
-		// $s = $conn->prepare("SELECT * FROM likes");
-		// $s->execute();
-		// $likes = $s->fetch(PDO::FETCH_ASSOC);
-	}
+	// 	// Select all columns from likes
+	// 	// $s = $conn->prepare("SELECT * FROM likes");
+	// 	// $s->execute();
+	// 	// $likes = $s->fetch(PDO::FETCH_ASSOC);
+	// }
 	
 	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
 		?>	
