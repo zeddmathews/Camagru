@@ -129,7 +129,8 @@
 			`id` INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			`postedby` VARCHAR(200),
 			`commentedby` VARCHAR(200),
-			`comment` VARCHAR(10000)
+			`comment` VARCHAR(10000),
+			`post_id` INT NOT NULL
 		)";
 		$conn->exec($sql);
 		echo "Amazingly functional shit<br>";

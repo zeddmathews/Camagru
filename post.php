@@ -22,8 +22,12 @@
 	}
 	if (isset($_SESSION['logged_in']) && !empty($_SESSION['logged_in'])) {
 		if (filter_has_var(INPUT_POST, 'delete')) {
-			$delete = $conn->prepare("DELETE FROM images WHERE id = ?");
-			$delete->execute(array($id));
+			$delete_image = $conn->prepare("DELETE FROM images WHERE id = ?");
+			$delete_image->execute(array($id));
+			$delete_like = $conn->prepare("DELETE FROM likes WHERE post_id = ?");
+			$delete_like->execute(array($id));
+			$delete_comment = $conn->prepare("DELETE FROM comments WHERE post_id = ?");
+			$delete_comment->execute(array($id));
 			header("Location: index.php");
 		}
 		if (filter_has_var(INPUT_POST, 'comment')) {
@@ -33,8 +37,8 @@
 			}
 			else if (!empty($comment)) {
 				try {
-					$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment) VALUES(?, ?, ?)");
-					$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment));
+					$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment, post_id) VALUES(?, ?, ?, ?)");
+					$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment, $id));
 					$check_notif = $conn->prepare("SELECT * FROM users WHERE email = ?");
 					$check_notif->execute(array($_SESSION['logged_in']));
 					$is_on = $check_notif->fetch(PDO::FETCH_ASSOC);
