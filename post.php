@@ -1,4 +1,5 @@
 <?php include('header.php')?>
+<script src="js/likes.js"></script>
 <?php
 	if ($_GET['id']) {
 		$id = $_GET['id'];
@@ -6,6 +7,14 @@
 			$stmt = $conn->prepare("SELECT * FROM images WHERE id = ?");
 			$stmt->execute(array($id));
 			$imgs = $stmt->fetch(PDO::FETCH_ASSOC);
+		}
+		catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+		try {
+			$fetch = $conn->prepare("SELECT * FROM likes WHERE post_id = ?");
+			$fetch->execute(array($id));
+			$likes = $fetch->rowCount();
 		}
 		catch(PDOException $e) {
 			echo $e->getMessage();
@@ -53,9 +62,10 @@
 	}
 	?>
 <img class = "img" src = "image/<?php echo $imgs['imagename'] ?>">
-<form class="edit-form" action="" method="post">
-	<button type="submit" name="like">Like</button>
 	<br>
+	<button name="like" onclick="like(<?php echo $id?>);">Like</button>
+	<b id="num_likes-<?php echo $id?>"><?php echo $likes?></b>
+<form class="edit-form" action="" method="post">
 <?php if ($_SESSION['logged_in'] == $imgs['email']): ?>
 	<button type="submit" name="delete">Delete</button>
 	<br>

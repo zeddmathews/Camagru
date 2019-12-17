@@ -2,9 +2,8 @@ function like(id)
 {
 	var request = new XMLHttpRequest();
 
-	request.onload = function(response)
+	request.onload = function()
 	{
-
 		if (request.status === 200)
 		{
 			var likes = document.getElementById("num_likes-"+id);
@@ -19,7 +18,7 @@ function like(id)
 			console.log(request.responseText);
 
 	}
-	request.open("POST", "like.php");
+	request.open("POST", "likes.php");
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	request.send('pid='+id);
+	request.send("pid="+id);
 }

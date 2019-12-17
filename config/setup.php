@@ -21,15 +21,15 @@
 	// Build Table 'Users'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS users (
-			id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			firstname VARCHAR(100) NOT NULL,
-			lastname VARCHAR(100) NOT NULL,
-			username VARCHAR(100) NOT NULL UNIQUE,
-			email VARCHAR(100) NOT NULL UNIQUE,
-			encrypt VARCHAR(200) NOT NULL,
-			verified BOOLEAN NOT NULL,
-			notifications BOOLEAN NOT NULL,
-			token VARCHAR(100) NOT NULL UNIQUE
+			`id` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			`firstname` VARCHAR(100) NOT NULL,
+			`lastname` VARCHAR(100) NOT NULL,
+			`username` VARCHAR(100) NOT NULL UNIQUE,
+			`email` VARCHAR(100) NOT NULL UNIQUE,
+			`encrypt` VARCHAR(200) NOT NULL,
+			`verified` BOOLEAN NOT NULL,
+			`notifications` BOOLEAN NOT NULL,
+			`token` VARCHAR(100) NOT NULL UNIQUE
 		)";
 		$conn->exec($sql);
 		echo "More shit functions<br>";
@@ -47,7 +47,7 @@
 		$usery = 'Groot';
 		$token = md5($usery);
 		$encrypt = password_hash($password, PASSWORD_BCRYPT);
-		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		$sql = "INSERT INTO users(`firstname`, `lastname`, `username`, `email`, `encrypt`, `verified`, `notifications`, `token`)
 		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':firsty', $firsty);
@@ -69,7 +69,7 @@
 		$usery = 'Pichu';
 		$token = md5($usery);
 		$encrypt = password_hash($password, PASSWORD_BCRYPT);
-		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		$sql = "INSERT INTO users(`firstname`, `lastname`, `username`, `email`, `encrypt`, `verified`, `notifications`, `token`)
 		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':firsty', $firsty);
@@ -91,7 +91,7 @@
 		$usery = 'Default';
 		$token = md5($usery);
 		$encrypt = password_hash($password, PASSWORD_BCRYPT);
-		$sql = "INSERT INTO users(firstname, lastname, username, email, encrypt, verified, notifications, token)
+		$sql = "INSERT INTO users(`firstname`, `lastname`, `username`, `email`, `encrypt`, `verified`, `notifications`, `token`)
 		VALUES (:firsty, :lasty, :usery, :lemail, :encrypt, 1, 1, :token)";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':firsty', $firsty);
@@ -109,11 +109,11 @@
 	// Build table 'Images'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS images (
-			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			imagename VARCHAR(200) NOT NULL,
-			username VARCHAR (100) NOT NULL,
-			email VARCHAR(200) NOT NULL,
-			created VARCHAR(200) NOT NULL
+			`id` INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			`imagename` VARCHAR(200) NOT NULL,
+			`username` VARCHAR (100) NOT NULL,
+			`email` VARCHAR(200) NOT NULL,
+			`created` VARCHAR(200) NOT NULL
 		)";
 		$conn->exec($sql);
 		echo "Extremely functional shit<br>";
@@ -126,10 +126,10 @@
 	// Build table 'Comments'
 	try {
 		$sql = "CREATE TABLE IF NOT EXISTS comments (
-			id INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			postedby VARCHAR(200),
-			commentedby VARCHAR(200),
-			comment VARCHAR(10000)
+			`id` INT(250) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			`postedby` VARCHAR(200),
+			`commentedby` VARCHAR(200),
+			`comment` VARCHAR(10000)
 		)";
 		$conn->exec($sql);
 		echo "Amazingly functional shit<br>";
@@ -139,21 +139,20 @@
 	}
 
 	// Build table 'Likes'
-	// try {
-	// 	$sql = "CREATE TABLE IF NOT EXISTS likes (
-	// 		like_id INT AUTO_INCREMENT PRIMARY KEY,
-	// 		user_id INT NOT NULL,
-	// 		post_id INT NOT NULL,
-	// 		FOREIGN KEY (user_id) REFERENCES users(id),
-	// 		FOREIGN KEY (post_id) REFERENCES images(id)
-	// 	)";
-	// 	$conn->exec($sql);
-	// 	echo "Phenomenally functional shit<br>";
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS likes (
+			`user_id` INT NOT NULL,
+			`post_id` INT NOT NULL,
+			`username` VARCHAR(100) NOT NULL,
+			UNIQUE KEY (`user_id`, `post_id`)
+		)";
+		$conn->exec($sql);
+		echo "Phenomenally functional shit<br>";
 		header("Location: ../index.php");
-	// }
-	// catch(PDOException $e) {
-	// 	echo $e->getMessage();
-	// }
+	}
+	catch(PDOException $e) {
+		echo $e->getMessage();
+	}
 
 	// Insert default images
 	// try {
