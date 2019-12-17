@@ -44,8 +44,8 @@
 </html>
 <?php
 	if (filter_has_var(INPUT_POST, 'update_password')) {
-		$new_pass = trim(htmlspecialchars($_POST['new_password']));
-		$conf_pass = trim(htmlspecialchars($_POST['conf_new_pass']));
+		$new_pass = trim(htmlspecialchars(htmlentities($_POST['new_password'])));
+		$conf_pass = trim(htmlspecialchars(htmlentities($_POST['conf_new_pass'])));
 		if (!empty($new_pass) && !empty($conf_pass)) {
 			try {
 				// $upp = preg_match('@[A-Z]@', $new_pass);

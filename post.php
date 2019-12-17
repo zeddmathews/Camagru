@@ -21,36 +21,33 @@
 		}
 	}
 	if (isset($_SESSION['logged_in']) && !empty($_SESSION['logged_in'])) {
-		if (filter_has_var(INPUT_POST, 'like')) {
-
-		}
 		if (filter_has_var(INPUT_POST, 'delete')) {
 			$delete = $conn->prepare("DELETE FROM images WHERE id = ?");
 			$delete->execute(array($id));
 			header("Location: index.php");
 		}
-	}
-	if (filter_has_var(INPUT_POST, 'comment')) {
-		$comment = trim(htmlspecialchars($_POST['comment']));
-		if (empty($comment)) {
-			echo 'Put stuff';
-		}
-		else if (!empty($comment)) {
-			try {
-				$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment) VALUES(?, ?, ?)");
-				$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment));
-				$check_notif = $conn->prepare("SELECT * FROM users WHERE email = ?");
-				$check_notif->execute(array($_SESSION['logged_in']));
-				$is_on = $check_notif->fetch(PDO::FETCH_ASSOC);
-				if ($is_on['notifications'] == "1") {
-					$msg = $_SESSION['user'].'commented: '.$comment.' on the image: '.$imgs['imagename'].'.';
-					mail($imgs['email'], 'Comment', $msg);
+		if (filter_has_var(INPUT_POST, 'comment')) {
+			$comment = trim(htmlspecialchars(htmlentities($_POST['comment'])));
+			if (empty($comment)) {
+				echo 'Put stuff';
+			}
+			else if (!empty($comment)) {
+				try {
+					$upload_comment = $conn->prepare("INSERT INTO comments (postedby, commentedby, comment) VALUES(?, ?, ?)");
+					$upload_comment->execute(array($imgs['username'], $_SESSION['user'], $comment));
+					$check_notif = $conn->prepare("SELECT * FROM users WHERE email = ?");
+					$check_notif->execute(array($_SESSION['logged_in']));
+					$is_on = $check_notif->fetch(PDO::FETCH_ASSOC);
+					if ($is_on['notifications'] == "1") {
+						$msg = $_SESSION['user'].'commented: '.$comment.' on the image: '.$imgs['imagename'].'.';
+						mail($imgs['email'], 'Comment', $msg);
+					}
 				}
+				catch(PDOException $e) {
+					echo $e->getMessage();
+				}
+				
 			}
-			catch(PDOException $e) {
-				echo $e->getMessage();
-			}
-			
 		}
 	}
 	try {

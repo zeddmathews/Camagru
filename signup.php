@@ -47,12 +47,12 @@ if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 	header("Location: index.php");
 }
 if (filter_has_var(INPUT_POST, 'Register')) {
-	$pass1 = trim(htmlspecialchars($_POST['password_1']));
-	$pass2 = trim(htmlspecialchars($_POST['password_2']));
-	$mail = trim(htmlspecialchars($_POST['email']));
-	$first = trim(htmlspecialchars($_POST['firstname']));
-	$last = trim(htmlspecialchars($_POST['lastname']));
-	$user = trim(htmlspecialchars($_POST['username']));
+	$pass1 = trim(htmlspecialchars(htmlentities($_POST['password_1'])));
+	$pass2 = trim(htmlspecialchars(htmlentities($_POST['password_2'])));
+	$mail = trim(htmlspecialchars(htmlentities($_POST['email'])));
+	$first = trim(htmlspecialchars(htmlentities($_POST['firstname'])));
+	$last = trim(htmlspecialchars(htmlentities($_POST['lastname'])));
+	$user = trim(htmlspecialchars(htmlentities($_POST['username'])));
 	
 	// $upp = preg_match('@[A-Z]@', $pass1);
 	// $low = preg_match('@[a-z]@', $pass1);

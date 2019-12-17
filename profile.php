@@ -35,9 +35,9 @@
 	</form>
 	<?php
 		if (filter_has_var(INPUT_POST, 'Update-username')) {
-			$ucu = trim(htmlspecialchars($_POST['user_curr_user']));
-			$ucp = trim(htmlspecialchars($_POST['user_curr_pass']));
-			$nu = trim(htmlspecialchars($_POST['new_user']));
+			$ucu = trim(htmlspecialchars(htmlentities($_POST['user_curr_user'])));
+			$ucp = trim(htmlspecialchars(htmlentities($_POST['user_curr_pass'])));
+			$nu = trim(htmlspecialchars(htmlentities($_POST['new_user'])));
 			if (empty($ucu) || empty($ucp) || empty($nu)) {
 				echo 'Please fill in all fields';
 			}
@@ -100,9 +100,9 @@
 	</form>
 	<?php
 		if (filter_has_var(INPUT_POST, 'Update-email')) {
-			$mcm = trim(htmlspecialchars($_POST['mail_curr_mail']));
-			$nm = trim(htmlspecialchars($_POST['new_mail']));
-			$mcp = trim(htmlspecialchars($_POST['mail_curr_pass']));
+			$mcm = trim(htmlspecialchars(htmlentities($_POST['mail_curr_mail'])));
+			$nm = trim(htmlspecialchars(htmlentities($_POST['new_mail'])));
+			$mcp = trim(htmlspecialchars(htmlentities($_POST['mail_curr_pass'])));
 			if (empty($mcm) || empty($nm) || empty($mcp)) {
 				echo 'Please fill in all fields';
 			}

@@ -38,8 +38,8 @@
 		header("Location: index.php");
 	}
 	if (filter_has_var(INPUT_POST, 'Login')) {
-		$mail = trim(htmlspecialchars($_POST['email']));
-		$pass = trim(htmlspecialchars($_POST['password']));
+		$mail = trim(htmlspecialchars(htmlentities($_POST['email'])));
+		$pass = trim(htmlspecialchars(htmlentities($_POST['password'])));
 		if (!empty($mail) && !empty($pass)) {
 			try {
 				$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");

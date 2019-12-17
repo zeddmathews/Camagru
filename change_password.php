@@ -1,13 +1,14 @@
 <?php include('header.php')?>
 <?php
-	// require('config/pdo_connection.php');
-
 	if(filter_has_var(INPUT_POST, 'verify')) {
-		$verify = trim(htmlspecialchars($_POST['Verify']));
+		$verify = trim(htmlspecialchars(htmlentities($_POST['Verify'])));
 		try {
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 			$stmt->execute(array($verify));
 			$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($fetch['verified'] == "0") {
+				echo 'Verify your account';
+			}
 			if ($fetch['email'] == $verify) {
 				$token = md5($verify);
 				$update = $conn->prepare("UPDATE users SET token = ? WHERE email = ?");
