@@ -1,7 +1,7 @@
 <?php include('header.php')?>
 <?php
 	if(filter_has_var(INPUT_POST, 'verify')) {
-		$verify = trim(htmlspecialchars(htmlentities($_POST['Verify'])));
+		$verify = trim(htmlentities($_POST['Verify']));
 		try {
 			$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 			$stmt->execute(array($verify));

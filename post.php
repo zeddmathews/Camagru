@@ -31,7 +31,7 @@
 			header("Location: index.php");
 		}
 		if (filter_has_var(INPUT_POST, 'comment')) {
-			$comment = trim(htmlspecialchars(htmlentities($_POST['comment'])));
+			$comment = trim(htmlentities($_POST['comment']));
 			if (empty($comment)) {
 				echo 'Put stuff';
 			}

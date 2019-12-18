@@ -46,12 +46,12 @@ if (isset($_SESSION['logged_in']) && !(empty($_SESSION['logged_in']))) {
 	header("Location: index.php");
 }
 if (filter_has_var(INPUT_POST, 'Register')) {
-	$pass1 = trim(htmlspecialchars(htmlentities($_POST['password_1'])));
-	$pass2 = trim(htmlspecialchars(htmlentities($_POST['password_2'])));
-	$mail = trim(htmlspecialchars(htmlentities($_POST['email'])));
-	$first = trim(htmlspecialchars(htmlentities($_POST['firstname'])));
-	$last = trim(htmlspecialchars(htmlentities($_POST['lastname'])));
-	$user = trim(htmlspecialchars(htmlentities($_POST['username'])));
+	$pass1 = trim(htmlentities($_POST['password_1']));
+	$pass2 = trim(htmlentities($_POST['password_2']));
+	$mail = trim(htmlentities($_POST['email']));
+	$first = trim(htmlentities($_POST['firstname']));
+	$last = trim(htmlentities($_POST['lastname']));
+	$user = trim(htmlentities($_POST['username']));
 	
 	$upp = preg_match('@[A-Z]@', $pass1);
 	$low = preg_match('@[a-z]@', $pass1);
@@ -77,11 +77,11 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 	else if (strlen($pass1) < 8) {
 		echo 'Password too short<br>';
 	}
-	if ($pass1 != $pass2) {
+	else if ($pass1 != $pass2) {
 		echo 'Passwords do not match<br>';
 		exit ;
 	}
-	if ($pass1 == $pass2) {
+	else if ($pass1 == $pass2) {
 		try {
 			$encrypt = password_hash($pass1, PASSWORD_BCRYPT);
 			$token = md5($_POST['username']);
