@@ -56,6 +56,9 @@
 					}
 					header("Location: index.php");
 				}
+				else {
+					echo 'Invalid password';
+				}
 			}
 			catch (PDOException $e) {
 				echo 'Nice'. $e->getMessage();

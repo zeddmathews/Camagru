@@ -7,6 +7,6 @@
 		session_destroy();
 	}
 	if (!(isset($_SESSION['logged_in'])) && empty($_SESSION['logged_in'])) {
-		header("Location: index.php");
+		header("Location: change_password.php");
 	}
 ?>

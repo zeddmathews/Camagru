@@ -10,7 +10,7 @@ loadMore = () => {
 				index.innerHTML += xhr.responseText;
 			}
 		}
-		xhr.open('POST', '/Camagru/scroll.php?load_id='+load_id);
+		xhr.open('POST', 'scroll.php?load_id='+load_id);
 		xhr.send();
 	}
 	if (notNotIndex) {
@@ -21,7 +21,7 @@ loadMore = () => {
 				notNotIndex.innerHTML += req.responseText;
 			}
 		}
-		req.open('POST', '/Camagru/pg_scroll.php?load_id='+load_id);
+		req.open('POST', 'pg_scroll.php?load_id='+load_id);
 		req.send();
 	}
 };

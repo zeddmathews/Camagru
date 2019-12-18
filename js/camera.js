@@ -57,6 +57,7 @@ window.addEventListener("load", () => {
 				capture.style.display = "none";
 				ploadmage.style.display = "none";
 				ploadbtn.style.display = "block";
+				sticker_display.style.display = "block";
 				sticksCanvas.style.display = "block";
 				div.style.display = "flex";	
 			});

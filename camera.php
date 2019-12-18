@@ -18,7 +18,7 @@
 	<h3>Add/Take pictures</h3>
 	<div class="sc">
 	<form action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="ploadmage" id="ploadmage">
+		<input type="file" name="ploadmage" id="ploadmage" accept="image/png">
 		<button name="ploadbtn" id="ploadbtn">Upload</button>
 	</form>
 	</div>

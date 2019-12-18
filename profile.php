@@ -180,7 +180,9 @@
 			<input type="checkbox" id="notifications" onclick="notif();" <?php if ($value == 1) {echo "checked";} ?>>
 			<span class="slider"></span>
 		</label>
-
+		<br>
+		<br>
+	<button><a href="force_logout.php">Reset Password</a></button>
 	<?php
 	?>
 </body>
