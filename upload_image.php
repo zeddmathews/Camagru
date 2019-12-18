@@ -24,13 +24,6 @@
 		}
 		$file_name .= ".png";
 		imagepng($img, "image/" . $file_name);
-		// var_dump ($_POST);
-		// $upload_dir = "saved/";
-		// $file = $upload_dir . basename($_FILES["img_up"]["name"]);
-		// $yes = 1;
-		// $imgName = $_FILES["img_up"]["name"];
-		// $type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-		// move_uploaded_file($_FILES["img_up"]["tmp_name"], $file);
 
 		$fetch = $conn->prepare("SELECT * FROM users WHERE email = ?");
 		$fetch->execute(array($_SESSION['logged_in']));

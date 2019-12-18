@@ -1,8 +1,5 @@
 <?php include('header.php')?>
 <?php
-	session_start();
-	// require('config/pdo_connection.php');
-
 	try {
 		$token = $_GET['token'];
 		$stmt = $conn->prepare("SELECT verified FROM users WHERE token = ?");

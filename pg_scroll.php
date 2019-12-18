@@ -6,7 +6,6 @@
 ?>
 <?php
 $load_id = $_GET['load_id'];
-// var_dump($load_id);
 $offset = ($load_id - 1) * 5;
 try {
 		$email = $_SESSION['logged_in'];

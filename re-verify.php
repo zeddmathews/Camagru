@@ -48,26 +48,26 @@
 		$conf_pass = trim(htmlspecialchars(htmlentities($_POST['conf_new_pass'])));
 		if (!empty($new_pass) && !empty($conf_pass)) {
 			try {
-				// $upp = preg_match('@[A-Z]@', $new_pass);
-				// $low = preg_match('@[a-z]@', $new_pass);
-				// $num = preg_match('@[0-9]@', $new_pass);
-				// $spec = preg_match('@[^\w]@', $new_pass);
-				// if (!$upp) {
-				// 	echo 'No uppercase letters<br>';
-				// }
-				// else if (!$low) {
-				// 	echo 'No lowercase letters<br>';
-				// }
-				// else if (!$num) {
-				// 	echo 'No numbers<br>';
-				// }
-				// else if (!$spec) {
-				// 	echo 'No special characters<br>';
-				// }
-				// else if (strlen($pass1) < 8) {
-				// 	echo 'Password too short<br>';
-				// }
-				if ($new_pass != $conf_pass) {
+				$upp = preg_match('@[A-Z]@', $new_pass);
+				$low = preg_match('@[a-z]@', $new_pass);
+				$num = preg_match('@[0-9]@', $new_pass);
+				$spec = preg_match('@[^\w]@', $new_pass);
+				if (!$upp) {
+					echo 'No uppercase letters<br>';
+				}
+				else if (!$low) {
+					echo 'No lowercase letters<br>';
+				}
+				else if (!$num) {
+					echo 'No numbers<br>';
+				}
+				else if (!$spec) {
+					echo 'No special characters<br>';
+				}
+				else if (strlen($pass1) < 8) {
+					echo 'Password too short<br>';
+				}
+				else if ($new_pass != $conf_pass) {
 					echo 'Passwords do not match';
 				}
 				else if ($new_pass == $conf_pass) {
