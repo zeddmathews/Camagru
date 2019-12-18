@@ -75,7 +75,8 @@ if (filter_has_var(INPUT_POST, 'Register')) {
 		echo 'No special characters<br>';
 	}
 	else if (strlen($pass1) < 8) {
-		echo 'Password too short<br>';
+		echo 'Password too short<br>
+		Minimum of 8 characters required<br>';
 	}
 	else if ($pass1 != $pass2) {
 		echo 'Passwords do not match<br>';

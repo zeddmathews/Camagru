@@ -9,7 +9,7 @@
 			if ($fetch['verified'] == "0") {
 				echo 'Verify your account';
 			}
-			if ($fetch['email'] == $verify) {
+			else if ($fetch['email'] == $verify) {
 				$token = md5($verify);
 				$update = $conn->prepare("UPDATE users SET token = ? WHERE email = ?");
 				$update->execute(array($token, $verify));
