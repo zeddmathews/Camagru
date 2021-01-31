@@ -23,7 +23,7 @@
 			$check_exists->execute(array($file_name . ".png"));
 		}
 		$file_name .= ".png";
-		imagepng($img, "image/" . $file_name);
+		imagepng($img, "./image/$file_name");
 
 		$fetch = $conn->prepare("SELECT * FROM users WHERE email = ?");
 		$fetch->execute(array($_SESSION['logged_in']));

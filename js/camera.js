@@ -4,13 +4,13 @@
 
 window.addEventListener("load", () => {
 	var video = document.querySelector("#video");
-	
+
 	var canvas = document.createElement('canvas');
 	var display = document.getElementById('display_canvas');
 	var ctx = canvas.getContext('2d');
-	
+
 	var capture = document.getElementById('capture');
-	
+
 	var sticksCanvas = document.createElement('canvas');
 	var sticker_display = document.getElementById('sticks_canvas');
 	var onestick = document.getElementById('1stick');
@@ -59,7 +59,7 @@ window.addEventListener("load", () => {
 				ploadbtn.style.display = "block";
 				sticker_display.style.display = "block";
 				sticksCanvas.style.display = "block";
-				div.style.display = "flex";	
+				div.style.display = "flex";
 			});
 		}
 		img.src = URL.createObjectURL(ploadmage.files[0])
@@ -105,5 +105,5 @@ window.addEventListener("load", () => {
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		xhr.send("make_img=" + encodeURIComponent(canvas.toDataURL().replace("data:image/png;base64,", ""))+"&make_sticks=" + encodeURIComponent(sticksCanvas.toDataURL().replace("data:image/png;base64,", "")));
 	});
-	
+
 });
